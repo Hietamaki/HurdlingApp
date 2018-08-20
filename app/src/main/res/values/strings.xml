@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">HurdlingApp</string>
+    <string name="recordVideo">Kuvaa video</string>
+    <string name="watchAnalysis">Katso analyysi</string>
+</resources>
