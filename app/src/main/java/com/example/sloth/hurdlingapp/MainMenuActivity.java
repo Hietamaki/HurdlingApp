@@ -22,6 +22,10 @@ public class MainMenuActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_main_menu);
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(this);
+        Button button2 = (Button) findViewById(R.id.button2);
+        button2.setOnClickListener(this);
+        Button button3 = (Button) findViewById(R.id.button3);
+        button3.setOnClickListener(this);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
             {
@@ -52,8 +56,30 @@ public class MainMenuActivity extends Activity implements View.OnClickListener{
 
         @Override
         public void onClick(View view) {
-            //Create the intent to start another activity
-            Intent intent = new Intent(MainMenuActivity.this, RecordingSettingsActivity.class);
-            startActivity(intent);
+
+            switch (view.getId()) {
+
+                case R.id.button:
+                    // do your code
+                    //Create the intent to start another activity
+                    Intent intent = new Intent(MainMenuActivity.this, RecordingSettingsActivity.class);
+                    startActivity(intent);
+                    break;
+
+                case R.id.button2:
+                    // do your code
+                    //Create the intent to start another activity
+                    Intent intent2 = new Intent(MainMenuActivity.this, FileSelectActivity.class);
+                    startActivity(intent2);
+                    break;
+
+                case R.id.button3:
+                    // do your code
+                    break;
+
+                default:
+                    break;
+            }
+
         }
 }

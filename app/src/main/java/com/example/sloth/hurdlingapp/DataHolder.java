@@ -10,4 +10,11 @@ public class DataHolder {
     {
         dataSet = true;
     }
+    private int videoIndex;
+
+    public int getVideoIndex()
+    {
+        videoIndex++;
+        return videoIndex - 1;
+    }
 }

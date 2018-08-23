@@ -12,6 +12,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,12 +28,12 @@ public class FileSelectActivity extends Activity{
     private Intent mResultIntent;
     // The path to the root of this app's internal storage
     private File mPrivateRootDir;
-    // The path to the "images" subdirectory
-    private File mImagesDir;
-    // Array of files in the images subdirectory
-    File[] mImageFiles;
-    // Array of filenames corresponding to mImageFiles
-    String[] mImageFilename;
+    // The path to the "Videos" subdirectory
+    private File mVideosDir;
+    // Array of files in the Videos subdirectory
+    File[] mVideoFiles;
+    // Array of filenames corresponding to mVideoFiles
+    String[] mVideoFilename;
 
     private ListView mFileListView;
     private Uri fileUri;
@@ -48,15 +49,15 @@ public class FileSelectActivity extends Activity{
         // Get the files/ subdirectory of internal storage
         mPrivateRootDir = Environment.getExternalStorageDirectory();
 
-        // Get the files/images subdirectory;
-        mImagesDir = new File(mPrivateRootDir, "videos");
+        // Get the files/Videos subdirectory;
+        mVideosDir = new File(mPrivateRootDir, "videos");
 
-        // Get the files in the images subdirectory
+        // Get the files in the Videos subdirectory
 
-        mImageFiles = mImagesDir.listFiles();
-        mImageFilename = new String[mImageFiles.length];
-        for (int i = 0; i < mImageFiles.length; i++) {
-            mImageFilename[i] = new String(mImageFiles[i].getName());
+        mVideoFiles = mVideosDir.listFiles();
+        mVideoFilename = new String[mVideoFiles.length];
+        for (int i = 0; i < mVideoFiles.length; i++) {
+            mVideoFilename[i] = new String(mVideoFiles[i].getName());
 
         }
 
@@ -64,15 +65,15 @@ public class FileSelectActivity extends Activity{
         setResult(Activity.RESULT_CANCELED, null);
         /*
          * Display the file names in the ListView mFileListView.
-         * Back the ListView with the array mImageFilenames, which
-         * you can create by iterating through mImageFiles and
+         * Back the ListView with the array mVideoFilenames, which
+         * you can create by iterating through mVideoFiles and
          * calling File.getAbsolutePath() for each File
          */
 
 
         mFileListView = findViewById(R.id.list_view);
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_list_view, mImageFilename);
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_list_view, mVideoFilename);
 
         mFileListView.setAdapter(adapter);
 
@@ -90,9 +91,9 @@ public class FileSelectActivity extends Activity{
                 /*
                  * Get a File for the selected file name.
                  * Assume that the file names are in the
-                 * mImageFilename array.
+                 * mVideoFilename array.
                  */
-                final File requestFile = new File(mImagesDir, mImageFilename[position]);
+                final File requestFile = new File(mVideosDir, mVideoFilename[position]);
                 /*
                  * Most file-related method calls need to be in
                  * try-catch blocks.
@@ -118,12 +119,11 @@ public class FileSelectActivity extends Activity{
                             mResultIntent);
 
                     //MOVE THIS CODE ELSEWHERE
-
                     Thread t = new Thread(new Runnable() {
                         @Override
                         public void run() {
                             String contentType = getMimeType(requestFile.getPath());
-Log.d("test1", contentType);
+//Log.d("test1", contentType);
 String filePath = requestFile.getAbsolutePath();
                             OkHttpClient client = new OkHttpClient();
                             RequestBody fileBody = RequestBody.create(MediaType.parse(contentType),requestFile);
