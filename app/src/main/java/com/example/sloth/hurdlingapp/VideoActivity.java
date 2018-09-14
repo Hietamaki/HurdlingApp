@@ -11,7 +11,6 @@ import android.widget.MediaController;
 import android.widget.VideoView;
 
 public class VideoActivity extends Activity {
-private SurfaceView surfaceView;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +25,6 @@ private SurfaceView surfaceView;
         MediaController mediaController = new MediaController(this);
         videoView.setMediaController(mediaController);
         mediaController.setAnchorView(videoView);
-
-    }
-
-    private void setViewSize(double dw, double dh)
-    {
-        LayoutParams layoutParams =
 
     }
 }
