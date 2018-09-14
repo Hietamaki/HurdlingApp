@@ -118,8 +118,16 @@ public class FileSelectActivity extends Activity{
                     FileSelectActivity.this.setResult(Activity.RESULT_OK,
                             mResultIntent);
 
+
+                    DataHolder.Instance.setVideoPath(requestFile.getPath());
+                    Log.d("test Path", requestFile.getPath());
+                    //TODO check if legit name
+                    Intent intent = new Intent(FileSelectActivity.this, VideoActivity.class);
+                    startActivity(intent);
+
+
                     //MOVE THIS CODE ELSEWHERE
-                    Thread t = new Thread(new Runnable() {
+                    /*Thread t = new Thread(new Runnable() {
                         @Override
                         public void run() {
                             String contentType = getMimeType(requestFile.getPath());
@@ -148,7 +156,7 @@ String filePath = requestFile.getAbsolutePath();
 
                         }
                     });
-                    t.start();
+                    t.start();*/
                 } else {
                     Log.d("dd", "Okay we are trying stuff here 3");
                     mResultIntent.setDataAndType(null, "");
@@ -161,9 +169,11 @@ String filePath = requestFile.getAbsolutePath();
         });
     }
 
+    //MOVE THIS CODE ELSEWHERE
     private String getMimeType(String path)
     {
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
     }
 }
+

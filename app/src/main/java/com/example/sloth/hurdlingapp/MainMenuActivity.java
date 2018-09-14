@@ -26,6 +26,8 @@ public class MainMenuActivity extends Activity implements View.OnClickListener{
         button2.setOnClickListener(this);
         Button button3 = (Button) findViewById(R.id.button3);
         button3.setOnClickListener(this);
+
+
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
             {
@@ -75,7 +77,9 @@ public class MainMenuActivity extends Activity implements View.OnClickListener{
 
                 case R.id.button3:
                     // do your code
+
                     break;
+
 
                 default:
                     break;

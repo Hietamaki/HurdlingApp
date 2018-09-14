@@ -8,4 +8,5 @@
     <string name="Gap34">Aitaväli 3-4</string>
     <string name="FenceGap">Aitavälin pituus</string>
     <string name="FenceHeight">Aitavälin korkeus</string>
+    <string name="SavedFileName">Tiedosto tallennetaan nimellä: </string>
 </resources>

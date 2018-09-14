@@ -11,10 +11,52 @@ public class DataHolder {
         dataSet = true;
     }
     private int videoIndex;
+    private String fenceHeight;
 
-    public int getVideoIndex()
-    {
+    public String getVideoPath() {
+        return videoPath;
+    }
+
+    public void setVideoPath(String videoPath) {
+        this.videoPath = videoPath;
+    }
+
+    private String videoPath;
+    public String getFenceHeight() {
+        return fenceHeight;
+    }
+
+    public void setFenceHeight(String fenceHeight) {
+        this.fenceHeight = fenceHeight;
+    }
+
+
+    private String fenceGap;
+    public String getFenceGap() {
+        return fenceGap;
+    }
+
+    public void setFenceGap(String fenceGap) {
+        this.fenceGap = fenceGap;
+    }
+
+    public int getFenceIndex() {
+        return fenceIndex;
+    }
+
+    public void setFenceIndex(int fenceIndex) {
+        this.fenceIndex = fenceIndex;
+    }
+
+    private int fenceIndex;
+
+    public int getVideoIndex() {
         videoIndex++;
         return videoIndex - 1;
+    }
+
+    public int getNextVideoIndex()
+    {
+        return videoIndex;
     }
 }
