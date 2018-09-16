@@ -17,6 +17,11 @@ public class DataHolder {
         return videoPath;
     }
 
+    public String getVideoName()
+    {
+        return "video_" +  getNextVideoIndex() + "_" + getFenceGap() + "_" +getFenceHeight() + "_" +getFenceIndex()+"_.mp4";
+    }
+
     public void setVideoPath(String videoPath) {
         this.videoPath = videoPath;
     }
@@ -50,7 +55,7 @@ public class DataHolder {
 
     private int fenceIndex;
 
-    public int getVideoIndex() {
+    public int  getVideoIndex() {
         videoIndex++;
         return videoIndex - 1;
     }

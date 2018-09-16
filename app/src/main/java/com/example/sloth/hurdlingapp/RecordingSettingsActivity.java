@@ -28,6 +28,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
     Button button2;
     Button button3;
     Button button4;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,8 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
         button3.setOnClickListener(this);
         button4 = (Button) findViewById(R.id.button4);
         button4.setOnClickListener(this);
+        textView = (TextView)findViewById(R.id.textView);
+        textView.setOnClickListener(this);
         Log.d("ddd", "ddddd");
         final TextInputLayout textInputLayout = findViewById(R.id.textInputLayout);
         textInputLayout.getEditText().addTextChangedListener(new TextWatcher() {
@@ -58,7 +61,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
             @Override
             public void afterTextChanged(Editable s) {
                 DataHolder.Instance.setFenceGap(textInputLayout.getEditText().getText().toString());
-                Log.d("test123", textInputLayout.getEditText().getText().toString());
+                changeTextView();
             }
         });
         final TextInputLayout textInputLayout2 = findViewById(R.id.textInputLayout2);
@@ -76,7 +79,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
             @Override
             public void afterTextChanged(Editable s) {
                 DataHolder.Instance.setFenceHeight(textInputLayout2.getEditText().getText().toString());
-                Log.d("test123", textInputLayout2.getEditText().getText().toString());
+                changeTextView();
             }
         });
         //TextView textView = findViewById(R.id.textInputLayout);
@@ -104,7 +107,10 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
 */
         Log.d("test", "test1");
         Uri mUri = FileProvider.getUriForFile(RecordingSettingsActivity.this, BuildConfig.APPLICATION_ID + ".provider", new File(Environment.getExternalStorageDirectory() + "/videos",
-                "video_" +  DataHolder.Instance.getVideoIndex() + "_" + DataHolder.Instance.getFenceGap() + "_" + DataHolder.Instance.getFenceHeight() + "_" + DataHolder.Instance.getVideoIndex()+"_.mp4"));
+                DataHolder.Instance.getVideoName()));
+        //This will increase the index by one
+        DataHolder.Instance.getVideoIndex();
+        changeTextView();
         Log.d("test", mUri.toString());
 
         i.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, mUri);
@@ -126,6 +132,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
             button3.setBackgroundColor(Color.LTGRAY);
             button4.setBackgroundColor(Color.LTGRAY);
             DataHolder.Instance.setFenceIndex(0);
+            changeTextView();
             Log.d("test", "test2");
         break;
 
@@ -135,6 +142,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
             button4.setBackgroundColor(Color.LTGRAY);
             button3.setBackgroundColor(Color.GREEN);
             DataHolder.Instance.setFenceIndex(1);
+            changeTextView();
             Log.d("test", "test3");
         break;
             case R.id.button4:
@@ -143,6 +151,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
                 button3.setBackgroundColor(Color.LTGRAY);
                 button4.setBackgroundColor(Color.GREEN);
                 DataHolder.Instance.setFenceIndex(2);
+                changeTextView();
                 Log.d("test", "test4");
                 break;
         default:
@@ -152,6 +161,10 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
     }
     }
 
+    private void changeTextView()
+    {
+        textView.setText(getString(R.string.SavedFileName) + DataHolder.Instance.getVideoName());
+    }
 }
 
 
