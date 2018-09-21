@@ -4,8 +4,10 @@ import android.Manifest;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +22,11 @@ public class MainMenuActivity extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        int  videoIndex = sharedPreferences.getInt(IdManager.INDEX_PREFERENCE, 0) ;
+        DataHolder.Instance.setVideoIndex(videoIndex);
+
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(this);
         Button button2 = (Button) findViewById(R.id.button2);

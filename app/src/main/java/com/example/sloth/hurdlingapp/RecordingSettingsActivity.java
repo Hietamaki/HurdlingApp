@@ -1,18 +1,14 @@
 package com.example.sloth.hurdlingapp;
 
 import android.app.Activity;
-import android.bluetooth.BluetoothClass;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
+import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.FileProvider;
 import android.text.Editable;
@@ -29,11 +25,17 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
     Button button3;
     Button button4;
     TextView textView;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recording_settings);
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        editor = sharedPreferences.edit();
+
 
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(this);
@@ -109,7 +111,13 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
         Uri mUri = FileProvider.getUriForFile(RecordingSettingsActivity.this, BuildConfig.APPLICATION_ID + ".provider", new File(Environment.getExternalStorageDirectory() + "/videos",
                 DataHolder.Instance.getVideoName()));
         //This will increase the index by one
-        DataHolder.Instance.getVideoIndex();
+        DataHolder.Instance.increaseVideoIndex();
+
+
+        //Save video's index to prevent duplicates
+        editor.putInt(IdManager.INDEX_PREFERENCE, DataHolder.Instance.getVideoIndex());
+        editor.apply();
+
         changeTextView();
         Log.d("test", mUri.toString());
 

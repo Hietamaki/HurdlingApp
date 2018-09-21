@@ -6,7 +6,9 @@ import android.content.Context;
 
 public class IdManager {
 
+
     public static IdManager Instance = new IdManager();
+    public static final String INDEX_PREFERENCE = "index";
 
     public IdManager()
     {
