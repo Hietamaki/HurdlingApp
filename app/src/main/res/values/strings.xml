@@ -9,4 +9,6 @@
     <string name="FenceGap">Aitavälin pituus</string>
     <string name="FenceHeight">Aitavälin korkeus</string>
     <string name="SavedFileName">Tiedosto tallennetaan nimellä: </string>
+    <string name="StartPosition">Alkupiste </string>
+    <string name="EndPosition">Loppupiste </string>
 </resources>
