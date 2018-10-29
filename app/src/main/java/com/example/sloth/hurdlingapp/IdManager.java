@@ -6,20 +6,18 @@ import android.content.Context;
 
 public class IdManager {
 
-
     public static IdManager Instance = new IdManager();
-    public static final String INDEX_PREFERENCE = "index";
 
-    public IdManager()
-    {
-        if(Instance==null) {
-        Instance = this;
+    public IdManager() {
+        if (Instance == null) {
+            Instance = this;
         }
     }
-public String getUniqueId(Context context)
-{
-    String androidId = Settings.Secure.getString(context.getContentResolver(),
-            Settings.Secure.ANDROID_ID);
-    return androidId;
-}
+
+    //Can be used to recognise devices apart.
+    public String getUniqueId(Context context) {
+        String androidId = Settings.Secure.getString(context.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+        return androidId;
+    }
 }

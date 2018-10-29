@@ -1,9 +1,12 @@
 package com.example.sloth.hurdlingapp;
 
 import android.util.Log;
+
+//Log for special cases.
 public class DebugLog {
     public final static boolean DEBUG = true;
-    public static void log(String message,  StackTraceElement stackTrace) {
+
+    public static void log(String message, StackTraceElement stackTrace) {
         if (DEBUG) {
             String fullClassName = stackTrace.getClassName();
             String className = fullClassName.substring(fullClassName.lastIndexOf(".") + 1);

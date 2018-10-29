@@ -24,7 +24,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class FileSelectActivity extends Activity{
+public class FileSelectActivity extends Activity {
     private Intent mResultIntent;
     // The path to the root of this app's internal storage
     private File mPrivateRootDir;
@@ -37,9 +37,10 @@ public class FileSelectActivity extends Activity{
 
     private ListView mFileListView;
     private Uri fileUri;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-// Define a listener that responds to clicks on a file in the ListView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_select);
 
@@ -63,20 +64,22 @@ public class FileSelectActivity extends Activity{
 
         // Set the Activity's result to null to begin with
         setResult(Activity.RESULT_CANCELED, null);
+
         /*
          * Display the file names in the ListView mFileListView.
          * Back the ListView with the array mVideoFilenames, which
          * you can create by iterating through mVideoFiles and
          * calling File.getAbsolutePath() for each File
          */
-
-
         mFileListView = findViewById(R.id.list_view);
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_list_view, mVideoFilename);
+        //Array to view
+        ArrayAdapter adapter = new ArrayAdapter<String>(this,
+                R.layout.activity_list_view, mVideoFilename);
 
         mFileListView.setAdapter(adapter);
 
+        // Define a listener that responds to clicks on a file in the ListView
         mFileListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             /*
@@ -109,71 +112,14 @@ public class FileSelectActivity extends Activity{
                     e.printStackTrace();
                 }
                 if (fileUri != null) {
-                    // Put the Uri and MIME type in the result Intent
-                    Log.d("dd", "Okay we are trying stuff here 2");
-                    mResultIntent.setDataAndType(
-                            fileUri,
-                            getContentResolver().getType(fileUri));
-                    // Set the result
-                    FileSelectActivity.this.setResult(Activity.RESULT_OK,
-                            mResultIntent);
-
-
-                    DataHolder.Instance.setVideoPath(requestFile.getPath());
-                    Log.d("test Path", requestFile.getPath());
+                    DataHolder.Instance.new DataWriter().setVideoPath(requestFile.getPath());
                     //TODO check if legit name
-                    Intent intent = new Intent(FileSelectActivity.this, VideoActivity.class);
+                    Intent intent = new Intent(FileSelectActivity.this,
+                            VideoActivity.class);
                     startActivity(intent);
-
-
-                    //MOVE THIS CODE ELSEWHERE
-                    /*Thread t = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            String contentType = getMimeType(requestFile.getPath());
-//Log.d("test1", contentType);
-String filePath = requestFile.getAbsolutePath();
-                            OkHttpClient client = new OkHttpClient();
-                            RequestBody fileBody = RequestBody.create(MediaType.parse(contentType),requestFile);
-                            RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM).addFormDataPart("type", contentType).addFormDataPart("uploadedFile",filePath.substring(filePath.lastIndexOf("/")+1),fileBody).build();
-                            Request request = new Request.Builder().url("http://192.168.43.244/testing/save_file.php").post(requestBody).build();
-
-
-
-                                try { Response response = client.newCall(request).execute();
-                                    if(!response.isSuccessful())
-                                    {
-                                        Log.d("error", "error1");
-                                    throw new IOException("ERROR : " + response);}
-                                    else
-                                    {
-                                        Log.d("success", "success1");
-                                    }
-                                } catch (IOException e) {
-                                  Log.d("error", "error2");
-                                    e.printStackTrace();
-                                }
-
-                        }
-                    });
-                    t.start();*/
-                } else {
-                    Log.d("dd", "Okay we are trying stuff here 3");
-                    mResultIntent.setDataAndType(null, "");
-                    FileSelectActivity.this.setResult(RESULT_CANCELED,
-                            mResultIntent);
-
-
                 }
             }
         });
-    }
-
-    //MOVE THIS CODE ELSEWHERE
-    private String getMimeType(String path)
-    {
-        String extension = MimeTypeMap.getFileExtensionFromUrl(path);
-        return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
     }
 }
 

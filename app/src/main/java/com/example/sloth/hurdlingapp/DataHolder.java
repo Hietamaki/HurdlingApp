@@ -1,71 +1,82 @@
 package com.example.sloth.hurdlingapp;
 
+//Global data holder.
+//Holds mostly recordingSettingsActivity data.
 public class DataHolder {
     public static final DataHolder Instance = new DataHolder();
-    private boolean dataSet;
-    public boolean isDataSet(){
-        return dataSet;
-    }
-    public void markDataAsSet()
-    {
-        dataSet = true;
-    }
-    private int videoIndex;
+    /**
+     * TODO: If data is set skip recording settings
+     */
+    private boolean isDataSet;
+
+    private int videoUniqueIndex;
+    private String videoPath;
+
+    private int fenceIndex;
     private String fenceHeight;
+    private String fenceGap;
+
+    public class DataWriter {
+
+        public void markDataAsSet() {
+            isDataSet = true;
+        }
+
+        public void setVideoUniqueIndex(int value) {
+            videoUniqueIndex = value;
+        }
+
+        public void increaseVideoUniqueIndex() {
+            videoUniqueIndex++;
+        }
+
+        public void setVideoPath(String value) {
+            videoPath = value;
+        }
+
+        public void setFenceIndex(int value) {
+            fenceIndex = value;
+        }
+
+        public void setFenceHeight(String value) {
+            fenceHeight = value;
+        }
+
+        public void setFenceGap(String value) {
+            fenceGap = value;
+        }
+
+
+    }
+
+    public boolean isDataSet() {
+        return isDataSet;
+    }
+
+    public int getVideoUniqueIndex() {
+        return videoUniqueIndex;
+    }
+
 
     public String getVideoPath() {
         return videoPath;
-    }
-
-    public String getVideoName()
-    {
-        return "video_" +  getVideoIndex() + "_" + getFenceGap() + "_" +getFenceHeight() + "_" +getFenceIndex()+"_.mp4";
-    }
-
-    public void setVideoPath(String videoPath) {
-        this.videoPath = videoPath;
-    }
-
-    private String videoPath;
-    public String getFenceHeight() {
-        return fenceHeight;
-    }
-
-    public void setFenceHeight(String fenceHeight) {
-        this.fenceHeight = fenceHeight;
-    }
-
-
-    private String fenceGap;
-    public String getFenceGap() {
-        return fenceGap;
-    }
-
-    public void setFenceGap(String fenceGap) {
-        this.fenceGap = fenceGap;
     }
 
     public int getFenceIndex() {
         return fenceIndex;
     }
 
-    public void setFenceIndex(int fenceIndex) {
-        this.fenceIndex = fenceIndex;
+    public String getFenceHeight() {
+        return fenceHeight;
     }
 
-    private int fenceIndex;
-
-    public void increaseVideoIndex() {
-        videoIndex++;
+    public String getFenceGap() {
+        return fenceGap;
     }
 
-    public void setVideoIndex(int videoIndex)
-    {
-        this.videoIndex = videoIndex;
+    //Return a video's name that is depended on most of the DataHolder's values.
+    public String getVideoName() {
+        return "video_" + getVideoUniqueIndex() + "_" + getFenceGap() + "_" + getFenceHeight() + "_" + getFenceIndex() + "_.mp4";
     }
 
-    public int getVideoIndex()
-    {
-        return videoIndex;
-    }
 }
