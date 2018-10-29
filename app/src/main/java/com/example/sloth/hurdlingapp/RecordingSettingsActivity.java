@@ -21,14 +21,14 @@ import android.widget.TextView;
 import java.io.File;
 
 public class RecordingSettingsActivity extends Activity implements View.OnClickListener {
+    DataWriter dataWriter = new DataWriter(DataHolder.Instance);
     /**
      * {@link #gapButton1}
      * {@link #gapButton2}
      * {@link #gapButton3}
      * {@link RecordingSettingsActivity#onClick(View)}
      * When one of the buttons is pressed it will be highlighted and other buttons are unhighlighted.
-     * Also when a button is pressed
-     * the value is stored with {@link DataHolder.DataWriter#setFenceIndex(int)}.
+     * Also when a button is pressed the value is stored with {@link DataWriter#setFenceIndex(int)}.
      * Then that value is used to construct the name of the video
      * Then the value is parsed from the name and used in the analysis to determine camera positions
      * in relation to each other.
@@ -77,8 +77,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
 
             @Override
             public void afterTextChanged(Editable s) {
-                DataHolder.Instance.new DataWriter().setFenceGap(
-                        fenceHeightInputLayout.getEditText().getText().toString());
+                dataWriter.setFenceGap(fenceHeightInputLayout.getEditText().getText().toString());
                 changeTextView();
             }
         });
@@ -96,8 +95,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
 
             @Override
             public void afterTextChanged(Editable s) {
-                DataHolder.Instance.new DataWriter().setFenceHeight(
-                        fenceGapInputLayout.getEditText().getText().toString());
+                dataWriter.setFenceHeight(fenceGapInputLayout.getEditText().getText().toString());
                 changeTextView();
             }
         });
@@ -116,7 +114,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
                         new File(Environment.getExternalStorageDirectory() + "/videos",
                                 DataHolder.Instance.getVideoName()));
 
-                DataHolder.Instance.new DataWriter().increaseVideoUniqueIndex();
+                dataWriter.increaseVideoUniqueIndex();
 
 
                 //Save video's index to prevent duplicates between instances.
@@ -140,7 +138,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
                 gapButton1.setBackgroundColor(Color.GREEN);
                 gapButton2.setBackgroundColor(Color.LTGRAY);
                 gapButton3.setBackgroundColor(Color.LTGRAY);
-                DataHolder.Instance.new DataWriter().setFenceIndex(0);
+                dataWriter.setFenceIndex(0);
                 changeTextView();
                 break;
 
@@ -149,7 +147,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
                 gapButton1.setBackgroundColor(Color.LTGRAY);
                 gapButton2.setBackgroundColor(Color.GREEN);
                 gapButton3.setBackgroundColor(Color.LTGRAY);
-                DataHolder.Instance.new DataWriter().setFenceIndex(1);
+                dataWriter.setFenceIndex(1);
                 changeTextView();
                 break;
             case R.id.button4:
@@ -157,7 +155,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
                 gapButton1.setBackgroundColor(Color.LTGRAY);
                 gapButton2.setBackgroundColor(Color.LTGRAY);
                 gapButton3.setBackgroundColor(Color.GREEN);
-                DataHolder.Instance.new DataWriter().setFenceIndex(2);
+                dataWriter.setFenceIndex(2);
                 changeTextView();
                 break;
             default:

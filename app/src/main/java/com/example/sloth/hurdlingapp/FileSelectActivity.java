@@ -38,6 +38,8 @@ public class FileSelectActivity extends Activity {
     private ListView mFileListView;
     private Uri fileUri;
 
+    DataWriter dataWriter = new DataWriter(DataHolder.Instance);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +114,8 @@ public class FileSelectActivity extends Activity {
                     e.printStackTrace();
                 }
                 if (fileUri != null) {
-                    DataHolder.Instance.new DataWriter().setVideoPath(requestFile.getPath());
+
+                    dataWriter.setVideoPath(requestFile.getPath());
                     //TODO check if legit name
                     Intent intent = new Intent(FileSelectActivity.this,
                             VideoActivity.class);

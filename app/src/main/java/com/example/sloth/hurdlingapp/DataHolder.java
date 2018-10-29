@@ -7,47 +7,15 @@ public class DataHolder {
     /**
      * TODO: If data is set skip recording settings
      */
-    private boolean isDataSet;
+    protected boolean isDataSet;
 
-    private int videoUniqueIndex;
-    private String videoPath;
+    protected int videoUniqueIndex;
+    protected String videoPath;
 
-    private int fenceIndex;
-    private String fenceHeight;
-    private String fenceGap;
+    protected int fenceIndex;
+    protected String fenceHeight;
+    protected String fenceGap;
 
-    public class DataWriter {
-
-        public void markDataAsSet() {
-            isDataSet = true;
-        }
-
-        public void setVideoUniqueIndex(int value) {
-            videoUniqueIndex = value;
-        }
-
-        public void increaseVideoUniqueIndex() {
-            videoUniqueIndex++;
-        }
-
-        public void setVideoPath(String value) {
-            videoPath = value;
-        }
-
-        public void setFenceIndex(int value) {
-            fenceIndex = value;
-        }
-
-        public void setFenceHeight(String value) {
-            fenceHeight = value;
-        }
-
-        public void setFenceGap(String value) {
-            fenceGap = value;
-        }
-
-
-    }
 
     public boolean isDataSet() {
         return isDataSet;
@@ -80,3 +48,41 @@ public class DataHolder {
     }
 
 }
+
+class DataWriter extends DataHolder {
+    DataHolder dataHolder;
+
+    public DataWriter(DataHolder dataHolder)
+    {
+        this.dataHolder = dataHolder;
+    }
+
+    public void markDataAsSet() {
+        dataHolder.isDataSet = true;
+    }
+
+    public void setVideoUniqueIndex(int value) {
+        dataHolder.videoUniqueIndex = value;
+    }
+
+    public void increaseVideoUniqueIndex() {
+        dataHolder.videoUniqueIndex++;
+    }
+
+    public void setVideoPath(String value) {
+        dataHolder.videoPath = value;
+    }
+
+    public void setFenceIndex(int value) {
+        dataHolder.fenceIndex = value;
+    }
+
+    public void setFenceHeight(String value) {
+        dataHolder.fenceHeight = value;
+    }
+
+    public void setFenceGap(String value) {
+        dataHolder.fenceGap = value;
+    }
+}
+
