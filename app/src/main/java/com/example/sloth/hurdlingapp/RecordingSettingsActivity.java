@@ -26,7 +26,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
      * {@link #gapButton3}
      * {@link RecordingSettingsActivity#onClick(View)}
      * When one of the buttons is pressed it will be highlighted and other buttons are unhighlighted.
-     * Also when a button is pressed the value is stored with {@link DataWriter#setFenceIndex(int)}.
+     * Also when a button is pressed the value is stored with {@link #setFenceIndex(int)}.
      * Then that value is used to construct the name of the video
      * Then the value is parsed from the name and used in the analysis to determine camera positions
      * in relation to each other.
@@ -237,7 +237,8 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
     }
 
     /**
-     * Display which name is used for saving. Gets the name from {@link DataHolder#getVideoName()}.
+     * Display which name is used for saving. Gets the name from
+     * {@link NameParser#createName(int, int, String, String)}.
      */
     private void changeTextView() {
         videoNameTextView.setText(getString(R.string.SavedFileName)
