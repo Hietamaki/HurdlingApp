@@ -2,13 +2,11 @@ package com.example.sloth.hurdlingapp;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.FileProvider;
@@ -21,7 +19,7 @@ import android.widget.TextView;
 import java.io.File;
 
 public class RecordingSettingsActivity extends Activity implements View.OnClickListener {
-    DataWriter dataWriter = new DataWriter(DataHolder.Instance);
+    StoredData storedData;
     /**
      * {@link #gapButton1}
      * {@link #gapButton2}
@@ -40,17 +38,94 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
      * {@link RecordingSettingsActivity#onClick(View)} Displays the videoName.
      */
     TextView videoNameTextView;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+
+    private int videoIndex;
+    private int fenceIndex;
+    private String fenceHeight;
+    private String fenceGap;
+
+    /**
+     * Get an unique value for the name. To separate it from other names.
+     *
+     * @return Unique value for the name. To separate it from other names.
+     */
+    public int getVideoIndex() {
+        return videoIndex;
+    }
+
+    /**
+     * Set an unique value for the name. To separate it from other names.
+     *
+     * @param videoIndex Unique value for the name. To separate it from other names.
+     */
+    public void setVideoIndex(int videoIndex) {
+        this.videoIndex = videoIndex;
+    }
+
+    /**
+     * Get an index of which fence gap is recorded. Starts from 0.
+     *
+     * @return Index of which fence gap is recorded.
+     */
+    public int getFenceIndex() {
+        return fenceIndex;
+    }
+
+    /**
+     * Set an index of which fence gap is recorded. Starts from 0.
+     *
+     * @param fenceIndex Index of which fence gap is recorded.
+     */
+    public void setFenceIndex(int fenceIndex) {
+        this.fenceIndex = fenceIndex;
+    }
+
+    /**
+     * get a value for the height of the fence.
+     *
+     * @return Value for the height of the fence.
+     */
+    public String getFenceHeight() {
+        return fenceHeight;
+    }
+
+    /**
+     * Set a Value for the height of the fence.
+     *
+     * @param fenceHeight Value for the height of the fence.
+     */
+    public void setFenceHeight(String fenceHeight) {
+        this.fenceHeight = fenceHeight;
+    }
+
+    /**
+     * get a value for the distance between fences.
+     *
+     * @return Value for the distance between fences.
+     */
+    public String getFenceGap() {
+        return fenceGap;
+    }
+
+    /**
+     * Set a value for the distance between fences.
+     *
+     * @param fenceGap Value for the distance between fences.
+     */
+    public void setFenceGap(String fenceGap) {
+        this.fenceGap = fenceGap;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recording_settings);
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        editor = sharedPreferences.edit();
+        //Create an instance for saving/loading SharedPreferences.
+        storedData = new StoredData(this);
 
+        //Load unique videoIndex and store it for further use.
+        videoIndex = storedData.getVideoIndex();
 
         Button recordButton = (Button) findViewById(R.id.button);
         recordButton.setOnClickListener(this);
@@ -77,7 +152,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
 
             @Override
             public void afterTextChanged(Editable s) {
-                dataWriter.setFenceGap(fenceHeightInputLayout.getEditText().getText().toString());
+                setFenceGap(fenceHeightInputLayout.getEditText().getText().toString());
                 changeTextView();
             }
         });
@@ -95,7 +170,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
 
             @Override
             public void afterTextChanged(Editable s) {
-                dataWriter.setFenceHeight(fenceGapInputLayout.getEditText().getText().toString());
+                setFenceHeight(fenceGapInputLayout.getEditText().getText().toString());
                 changeTextView();
             }
         });
@@ -110,17 +185,15 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
                 videoCaptureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
                 Uri mUri = FileProvider.getUriForFile(RecordingSettingsActivity.this,
-                        BuildConfig.APPLICATION_ID + ".provider",
-                        new File(Environment.getExternalStorageDirectory() + "/videos",
-                                DataHolder.Instance.getVideoName()));
+                        BuildConfig.APPLICATION_ID + Constants.PROVIDER_EXTENSION_F,
+                        new File(Environment.getExternalStorageDirectory() + Constants.VIDEO_FOLDER_F,
+                                NameParser.createName(videoIndex, fenceIndex, fenceGap, fenceHeight)));
+                //Increment unique videoIndex and store it.
+                //Will increment even if video recording fails.
+                storedData.changeVideoIndex();
 
-                dataWriter.increaseVideoUniqueIndex();
-
-
-                //Save video's index to prevent duplicates between instances.
-                editor.putInt(PreferenceConstants.INDEX, DataHolder.Instance.getVideoUniqueIndex());
-                editor.apply();
-
+                //Display changes in the video name.
+                videoIndex = storedData.getVideoIndex();
                 changeTextView();
 
                 /**
@@ -138,7 +211,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
                 gapButton1.setBackgroundColor(Color.GREEN);
                 gapButton2.setBackgroundColor(Color.LTGRAY);
                 gapButton3.setBackgroundColor(Color.LTGRAY);
-                dataWriter.setFenceIndex(0);
+                setFenceIndex(0);
                 changeTextView();
                 break;
 
@@ -147,7 +220,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
                 gapButton1.setBackgroundColor(Color.LTGRAY);
                 gapButton2.setBackgroundColor(Color.GREEN);
                 gapButton3.setBackgroundColor(Color.LTGRAY);
-                dataWriter.setFenceIndex(1);
+                setFenceIndex(1);
                 changeTextView();
                 break;
             case R.id.button4:
@@ -155,7 +228,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
                 gapButton1.setBackgroundColor(Color.LTGRAY);
                 gapButton2.setBackgroundColor(Color.LTGRAY);
                 gapButton3.setBackgroundColor(Color.GREEN);
-                dataWriter.setFenceIndex(2);
+                setFenceIndex(2);
                 changeTextView();
                 break;
             default:
@@ -168,7 +241,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
      */
     private void changeTextView() {
         videoNameTextView.setText(getString(R.string.SavedFileName)
-                + DataHolder.Instance.getVideoName());
+                + NameParser.createName(videoIndex, fenceIndex, fenceGap, fenceHeight));
     }
 }
 

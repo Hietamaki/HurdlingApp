@@ -14,18 +14,11 @@ import android.widget.Button;
 
 //Application's starting activity.
 public class MainMenuActivity extends Activity implements View.OnClickListener {
-    DataWriter dataWriter = new DataWriter(DataHolder.Instance);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        //Store videoIndex, so between application instances so there won't be any duplicate file
-        //names.
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        int videoIndex = sharedPreferences.getInt(PreferenceConstants.INDEX, 0);
-        dataWriter.setVideoUniqueIndex(videoIndex);
 
         Button recordMenuButton = (Button) findViewById(R.id.button);
         recordMenuButton.setOnClickListener(this);

@@ -1,6 +1,7 @@
 package com.example.sloth.hurdlingapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -108,8 +109,11 @@ public class VideoActivity extends Activity {
                 Util.getUserAgent(this, "com.example.sloth.hurdlingapp"),
                 (DefaultBandwidthMeter) bandwidthMeter);
 
-        /**In {@link FileSelectActivity} the videoPath is stored to DataHolder.*/
-        String videoPath = DataHolder.Instance.getVideoPath();
+        /**
+         * In {@link FileSelectActivity} the videoPath is stored to Intent.
+         * */
+        Intent intent = getIntent();
+        String videoPath = intent.getStringExtra(Constants.VIDEO_FILE_PATH_I);
         //Assumes it's mp4
         Uri mp4VideoUri = Uri.parse(videoPath);
 
