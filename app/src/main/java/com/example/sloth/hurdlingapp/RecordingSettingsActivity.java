@@ -186,12 +186,12 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
 
                 Uri mUri = FileProvider.getUriForFile(RecordingSettingsActivity.this,
                         BuildConfig.APPLICATION_ID + Constants.PROVIDER_EXTENSION_F,
-                        new File(Environment.getExternalStorageDirectory() + Constants.VIDEO_FOLDER_F,
-                                NameParser.createName(videoIndex, fenceIndex, fenceGap, fenceHeight)));
+                        new File(Environment.getExternalStorageDirectory() +
+                                Constants.VIDEO_FOLDER_F, NameParser.createVideoName(
+                                storedData.getAndIncrementVideoIndex(),
+                                fenceIndex, fenceGap, fenceHeight)));
                 //Increment unique videoIndex and store it.
                 //Will increment even if video recording fails.
-                storedData.changeVideoIndex();
-
                 //Display changes in the video name.
                 videoIndex = storedData.getVideoIndex();
                 changeTextView();
@@ -238,11 +238,11 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
 
     /**
      * Display which name is used for saving. Gets the name from
-     * {@link NameParser#createName(int, int, String, String)}.
+     * {@link NameParser#createVideoName(int, int, String, String)}.
      */
     private void changeTextView() {
         videoNameTextView.setText(getString(R.string.SavedFileName)
-                + NameParser.createName(videoIndex, fenceIndex, fenceGap, fenceHeight));
+                + NameParser.createVideoName(videoIndex, fenceIndex, fenceGap, fenceHeight));
     }
 }
 

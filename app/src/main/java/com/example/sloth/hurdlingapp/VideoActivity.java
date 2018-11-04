@@ -9,6 +9,8 @@ import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.edmodo.rangebar.RangeBar;
@@ -27,8 +29,11 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
-public class VideoActivity extends Activity {
+public class VideoActivity extends Activity implements View.OnClickListener {
 
+
+    //Test Button for trimming
+    Button testButton;
 
     SimpleExoPlayer player;
     /**
@@ -73,6 +78,8 @@ public class VideoActivity extends Activity {
     //video size in ms
     int videoDuration;
 
+    String videoPath;
+
     /**
      * There are listeners in {@link #rangeBar} and in {@link #endOfCutTextInputLayout}
      * and {@link #startOfCutTextInputLayout}, that will change each other's values.
@@ -113,7 +120,7 @@ public class VideoActivity extends Activity {
          * In {@link FileSelectActivity} the videoPath is stored to Intent.
          * */
         Intent intent = getIntent();
-        String videoPath = intent.getStringExtra(Constants.VIDEO_FILE_PATH_I);
+        videoPath = intent.getStringExtra(Constants.VIDEO_FILE_PATH_I);
         //Assumes it's mp4
         Uri mp4VideoUri = Uri.parse(videoPath);
 
@@ -309,6 +316,17 @@ public class VideoActivity extends Activity {
             }
         });
 
+        //Trim test button
+        testButton = (Button) findViewById(R.id.button5);
+        testButton.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        //Trim test button clicked
+        VideoEditor.Instance.trimVideo(this, Integer.valueOf(getLeftTextFieldValue()),
+                Integer.valueOf(getRightTextFieldValue()), videoPath);
     }
 
     /**
@@ -340,14 +358,24 @@ public class VideoActivity extends Activity {
      * Takes the {@link #leftThumbValue} and displays it on {@link #startOfCutTextInputLayout}.
      */
     void setLeftTextFieldValue() {
-        startOfCutTextInputLayout.getEditText().setText(String.valueOf(getVideoValue(leftThumbValue)));
+        startOfCutTextInputLayout.getEditText().setText(
+                String.valueOf(getVideoValue(leftThumbValue)));
+    }
+
+    String getLeftTextFieldValue() {
+        return startOfCutTextInputLayout.getEditText().getText().toString();
     }
 
     /**
      * Takes the {@link #rightThumbValue} and displays it on {@link #endOfCutTextInputLayout}.
      */
     void setRightTextFieldValue() {
-        endOfCutTextInputLayout.getEditText().setText(String.valueOf(getVideoValue(rightThumbValue)));
+        endOfCutTextInputLayout.getEditText().setText(
+                String.valueOf(getVideoValue(rightThumbValue)));
+    }
+
+    String getRightTextFieldValue() {
+        return endOfCutTextInputLayout.getEditText().getText().toString();
     }
 
     /**

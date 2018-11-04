@@ -11,6 +11,7 @@ public class StoredData {
     /**
      * Create an instance for saving/loading SharedPreferences.
      * Currenly SharedPreferences holds one integer.
+     *
      * @param activity Current Activity
      */
     public StoredData(Activity activity) {
@@ -19,21 +20,26 @@ public class StoredData {
     }
 
     /**
-     * Get a index that should be unique. Use {@link #changeVideoIndex()} after actual usage.
-     * @return Index that should be unique. Use {@link #changeVideoIndex()} after actual usage.
+     * Get a index that is unique for displaying purpose.
+     *
+     * @return Index that is unique for displaying purpose.
      */
     public int getVideoIndex() {
         return sharedPreferences.getInt(Constants.INDEX_S, 0);
     }
 
     /**
-     * Increase videoIndex by one and store it. So nothing will use the same index.
+     * Get a index that is unique.
+     * After this increase the videoIndex by one and store it. So nothing will use the same index.
+     *
+     * @return Index that is unique.
      */
-    public void changeVideoIndex() {
+    public int getAndIncrementVideoIndex() {
         int oldVideoIndex = sharedPreferences.getInt(Constants.INDEX_S, 0);
         oldVideoIndex++;
         editor.putInt(Constants.INDEX_S, oldVideoIndex);
         editor.apply();
+        return oldVideoIndex - 1;
     }
 
 }

@@ -90,4 +90,12 @@
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TestTrim"
+        tools:layout_editor_absoluteX="504dp"
+        tools:layout_editor_absoluteY="0dp" />
+
 </android.support.constraint.ConstraintLayout>
