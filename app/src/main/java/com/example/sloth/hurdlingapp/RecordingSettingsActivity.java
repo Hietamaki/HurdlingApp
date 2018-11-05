@@ -2,6 +2,7 @@ package com.example.sloth.hurdlingapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -183,6 +184,8 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
                 //Video record button pressed.
                 Intent videoCaptureIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
                 videoCaptureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                videoCaptureIntent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION,
+                        ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
                 Uri mUri = FileProvider.getUriForFile(RecordingSettingsActivity.this,
                         BuildConfig.APPLICATION_ID + Constants.PROVIDER_EXTENSION_F,

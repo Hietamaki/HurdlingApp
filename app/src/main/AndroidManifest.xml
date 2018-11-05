@@ -15,17 +15,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateHidden">
-        <activity android:name=".MainMenuActivity">
+        <activity android:name=".MainMenuActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".VideoActivity">
 
         </activity>
-        <activity android:name=".RecordingSettingsActivity">
+        <activity android:name=".VideoActivity"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity android:name=".RecordingSettingsActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.PICK" />
 
@@ -35,6 +38,7 @@
         </activity>
         <activity
             android:name=".FileSelectActivity"
+            android:screenOrientation="landscape"
             android:label="File Selector">
             <intent-filter>
 
