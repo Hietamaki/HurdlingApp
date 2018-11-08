@@ -90,7 +90,7 @@
         </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/dragBackground1"
@@ -102,64 +102,134 @@
         android:text="TestTrim"
         tools:layout_editor_absoluteX="504dp"
         tools:layout_editor_absoluteY="0dp"
-        />
+        tools:ignore="MissingConstraints" />
+
+        </android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="120px"
+        android:layout_height="120px"
+        android:id="@+id/fenceMarker0"
+        >
         <ImageView
-            android:id="@+id/fenceMarker_LTL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/TL"
+            android:src="@drawable/marker"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             />
+    </android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="120px"
+        android:layout_height="120px"
+        android:id="@+id/fenceMarker1"
+        >
         <ImageView
-            android:id="@+id/fenceMarker_LTR"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/TL"
+            android:src="@drawable/marker"
             android:rotation="90"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             />
+    </android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="120px"
+        android:layout_height="120px"
+        android:id="@+id/fenceMarker2"
+        >
+
         <ImageView
-            android:id="@+id/fenceMarker_LBR"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/TL"
             android:rotation="180"
-            />
+            android:src="@drawable/marker"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="120px"
+        android:layout_height="120px"
+        android:id="@+id/fenceMarker3"
+        >
         <ImageView
-            android:id="@+id/fenceMarker_LBL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/TL"
+            android:src="@drawable/marker"
             android:rotation="270"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             />
+    </android.support.constraint.ConstraintLayout>
+<android.support.constraint.ConstraintLayout
+android:layout_width="120px"
+android:layout_height="120px"
+android:id="@+id/fenceMarker4"
+    >
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/marker"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    />
+</android.support.constraint.ConstraintLayout>
+<android.support.constraint.ConstraintLayout
+android:layout_width="120px"
+android:layout_height="120px"
+android:id="@+id/fenceMarker5"
+    >
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/marker"
+    android:rotation="90"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    />
+</android.support.constraint.ConstraintLayout>
+<android.support.constraint.ConstraintLayout
+android:layout_width="120px"
+android:layout_height="120px"
+android:id="@+id/fenceMarker6"
+    >
 
-        <ImageView
-            android:id="@+id/fenceMarker_RTL"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/TL"
-            />
-        <ImageView
-            android:id="@+id/fenceMarker_RTR"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/TL"
-            android:rotation="90"
-            />
-        <ImageView
-            android:id="@+id/fenceMarker_RBR"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/TL"
-            android:rotation="180"
-            />
-        <ImageView
-            android:id="@+id/fenceMarker_RBL"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/TL"
-            android:rotation="270"
-            />
-        </LinearLayout>
-
-
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:rotation="180"
+    android:src="@drawable/marker"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>
+<android.support.constraint.ConstraintLayout
+android:layout_width="120px"
+android:layout_height="120px"
+android:id="@+id/fenceMarker7"
+    >
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/marker"
+    android:rotation="270"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    />
+</android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -1,16 +1,24 @@
 package com.example.sloth.hurdlingapp;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.edmodo.rangebar.RangeBar;
@@ -36,6 +44,10 @@ public class VideoActivity extends Activity implements View.OnClickListener {
     Button testButton;
 
     SimpleExoPlayer player;
+
+    //Analysis needs the fence markers.
+    View fenceMarkers[] = new View[8];
+
     /**
      * {@link #positionTextView}
      * {@link #durationTextView}
@@ -320,6 +332,63 @@ public class VideoActivity extends Activity implements View.OnClickListener {
         testButton = (Button) findViewById(R.id.button5);
         testButton.setOnClickListener(this);
 
+        // Assign the touch listener to markers for moving purpose.
+        for(int i = 0; i < fenceMarkers.length; i++) {
+            String ID = "fenceMarker" + i;
+            int resID = getResources().getIdentifier(ID, "id", getPackageName());
+            fenceMarkers[i] = findViewById(resID);
+            fenceMarkers[i].setOnTouchListener(new MyTouchListener());
+        }
+        // Add drag and drop listener to drag and drop background.
+        findViewById(R.id.dragBackground1).setOnDragListener(new MyDragListener());
+
+
+    }
+
+    class MyDragListener implements View.OnDragListener {
+        @Override
+        public boolean onDrag(View v, DragEvent event) {
+            switch (event.getAction()) {
+                case DragEvent.ACTION_DRAG_STARTED:
+                    // do nothing
+                    break;
+                case DragEvent.ACTION_DRAG_ENTERED:
+
+                    break;
+                case DragEvent.ACTION_DRAG_EXITED:
+
+                    break;
+                case DragEvent.ACTION_DROP:
+                    // Dropped, reassign View to ViewGroup
+                    float x = event.getX();
+                    float y = event.getY();
+                    View view = (View) event.getLocalState();
+                    view.setVisibility(View.VISIBLE);
+                    view.setY(y-((float)view.getHeight()/2));
+                    view.setX(x-((float)view.getWidth()/2));
+                    break;
+                case DragEvent.ACTION_DRAG_ENDED:
+
+                default:
+                    break;
+            }
+            return true;
+        }
+    }
+    // Touch listener for dragging.
+    private final class MyTouchListener implements View.OnTouchListener {
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                ClipData data = ClipData.newPlainText("", "");
+                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(
+                        view);
+                view.startDrag(data, shadowBuilder, view, 0);
+                view.setVisibility(View.INVISIBLE);
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     @Override
