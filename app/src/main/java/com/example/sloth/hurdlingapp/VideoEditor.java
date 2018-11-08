@@ -23,10 +23,11 @@ public class VideoEditor {
      * @param startPosition Is the start position of trim.
      * @param endPosition   Is the end position of trim.
      * @param videoPath     Is the name of the video.
+     * @return Edited video's name
      */
-    public void trimVideo(Activity activity, int startPosition, int endPosition, String videoPath) {
+    public String trimVideo(Activity activity, int startPosition, int endPosition, String videoPath) {
         String[] parsedValues = NameParser.parseName(videoPath);
-        trimVideo(activity, startPosition, endPosition, Integer.valueOf(parsedValues[1]),
+        return trimVideo(activity, startPosition, endPosition, Integer.valueOf(parsedValues[1]),
                 Integer.valueOf(parsedValues[4]), parsedValues[2], parsedValues[3]);
     }
 
@@ -38,8 +39,9 @@ public class VideoEditor {
      * @param fenceIndex       Shows what gap was recorded. Only used for renaming purpose.
      * @param fenceGap         Is the distance between fences. Only used for renaming purpose.
      * @param fenceHeight      Is the height of the fences. Only used for renaming purpose.
+     * @return Edited video's name
      */
-    public void trimVideo(Activity activity, int startPosition, int endPosition,
+    public String trimVideo(Activity activity, int startPosition, int endPosition,
                           int videoUniqueIndex, int fenceIndex,
                           String fenceGap, String fenceHeight) {
 
@@ -73,6 +75,7 @@ public class VideoEditor {
             // Handle if FFmpeg is not supported by device
 
         }
+        String destination = null;
 
         try {
             //Source of the video file.
@@ -85,7 +88,7 @@ public class VideoEditor {
             //Destination of the edited file.
             //External storage directory + videos + "/" + edited video's name.
             //createEditName will increase video unique index by one.
-            String destination =
+            destination =
                     Environment.getExternalStorageDirectory() + Constants.EDITED_FOLDER_F +
                             "/" + NameParser.createEditName(videoUniqueIndex, fenceIndex,
                             fenceGap, fenceHeight, activity);
@@ -128,8 +131,9 @@ public class VideoEditor {
                     });
         } catch (FFmpegCommandAlreadyRunningException e) {
             // Handle if FFmpeg is already running
-        }
 
+        }
+        return destination;
 
     }
 }
