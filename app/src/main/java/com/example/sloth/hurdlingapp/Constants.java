@@ -23,4 +23,8 @@ public class Constants {
     public final static String IS_EDITED_N = "edit" + SPACE_N;
     public final static String VIDEO_EXTENSION_N = SPACE_N + VIDEO_EXTENSION_F;
 
+    //XML
+    public final static  String UPLOADED_FILE_X = "uploaded_file";
+    public final static  String TYPE_X = "type";
+
 }
