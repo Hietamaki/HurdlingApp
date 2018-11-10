@@ -3,22 +3,16 @@ package com.example.sloth.hurdlingapp;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.edmodo.rangebar.RangeBar;
@@ -37,6 +31,8 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
+import java.io.File;
+
 public class VideoActivity extends Activity implements View.OnClickListener {
 
 
@@ -44,6 +40,8 @@ public class VideoActivity extends Activity implements View.OnClickListener {
     Button testButton;
 
     SimpleExoPlayer player;
+    String destination;
+    PlayerView playerView;
 
     //Analysis needs the fence markers.
     View fenceMarkers[] = new View[8];
@@ -120,7 +118,7 @@ public class VideoActivity extends Activity implements View.OnClickListener {
         DefaultTrackSelector trackSelector =
                 new DefaultTrackSelector(videoTrackSelectionFactory);
         player = ExoPlayerFactory.newSimpleInstance(this, trackSelector);
-        PlayerView playerView = findViewById(R.id.playerView_step_video);
+        playerView = findViewById(R.id.playerView_step_video);
         playerView.setPlayer(player);
 
         // Produces DataSource instances through which media data is loaded.
@@ -333,8 +331,8 @@ public class VideoActivity extends Activity implements View.OnClickListener {
         testButton.setOnClickListener(this);
 
         // Assign the touch listener to markers for moving purpose.
-        for(int i = 0; i < fenceMarkers.length; i++) {
-            String ID = "fenceMarker" + i;
+        for (int i = 0; i < fenceMarkers.length; i++) {
+            String ID = Constants.FENCE_MARKER_X + i;
             int resID = getResources().getIdentifier(ID, "id", getPackageName());
             fenceMarkers[i] = findViewById(resID);
             fenceMarkers[i].setOnTouchListener(new MyTouchListener());
@@ -364,8 +362,8 @@ public class VideoActivity extends Activity implements View.OnClickListener {
                     float y = event.getY();
                     View view = (View) event.getLocalState();
                     view.setVisibility(View.VISIBLE);
-                    view.setY(y-((float)view.getHeight()/2));
-                    view.setX(x-((float)view.getWidth()/2));
+                    view.setY(y - ((float) view.getHeight() / 2));
+                    view.setX(x - ((float) view.getWidth() / 2));
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
 
@@ -375,6 +373,7 @@ public class VideoActivity extends Activity implements View.OnClickListener {
             return true;
         }
     }
+
     // Touch listener for dragging.
     private final class MyTouchListener implements View.OnTouchListener {
         public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -393,9 +392,19 @@ public class VideoActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        //Trim test button clicked
-        VideoEditor.Instance.trimVideo(this, Integer.valueOf(getLeftTextFieldValue()),
-                Integer.valueOf(getRightTextFieldValue()), videoPath);
+        //Send button clicked
+        //Trims the video and when done the uploadFile method will be invoked.
+        destination = VideoEditor.Instance.trimVideo(VideoActivity.this,
+                Integer.valueOf(getLeftTextFieldValue()),
+                Integer.valueOf(getRightTextFieldValue()), videoPath, () -> uploadFile());
+    }
+
+    /**
+     * Uploads the file to the local server.
+     * Notice that local ip is hard coded.
+     */
+    public void uploadFile() {
+        VideoSender.Instance.fileUpload(this, new File(destination), "pholder");
     }
 
     /**
