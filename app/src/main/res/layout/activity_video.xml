@@ -19,11 +19,6 @@
             android:id="@+id/playerView_step_video"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -91,21 +86,22 @@
         </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/dragBackground1"
-        >
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TestTrim"
-        tools:layout_editor_absoluteX="504dp"
-        tools:layout_editor_absoluteY="0dp"
-        tools:ignore="MissingConstraints" />
 
-        </LinearLayout>
+    <LinearLayout
+        android:id="@+id/dragBackground1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TestTrim"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="504dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/fenceMarker0"
@@ -147,6 +143,25 @@
         android:id="@+id/fenceMarker2"
         android:layout_width="120px"
         android:layout_height="120px"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/fenceMarker3"
+        app:layout_constraintStart_toStartOf="@+id/fenceMarker0"
+        app:layout_constraintTop_toBottomOf="@+id/fenceMarker0">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="56px"
+            android:rotation="270"
+            android:src="@drawable/marker" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fenceMarker3"
+        android:layout_width="120px"
+        android:layout_height="120px"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/fenceMarker1"
         app:layout_constraintTop_toBottomOf="@+id/fenceMarker1">
@@ -156,25 +171,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="56px"
             android:rotation="180"
-            android:src="@drawable/marker" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/fenceMarker3"
-        android:layout_width="120px"
-        android:layout_height="120px"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/fenceMarker2"
-        app:layout_constraintStart_toStartOf="@+id/fenceMarker0"
-        app:layout_constraintTop_toBottomOf="@+id/fenceMarker0">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="56px"
-            android:rotation="270"
             android:src="@drawable/marker" />
     </LinearLayout>
 
@@ -218,6 +214,23 @@
         android:id="@+id/fenceMarker6"
         android:layout_width="120px"
         android:layout_height="120px"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fenceMarker7"
+        app:layout_constraintEnd_toStartOf="@+id/fenceMarker7">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="56px"
+            android:rotation="270"
+            android:src="@drawable/marker" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fenceMarker7"
+        android:layout_width="120px"
+        android:layout_height="120px"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/fenceMarker5"
         app:layout_constraintTop_toBottomOf="@+id/fenceMarker5">
@@ -227,23 +240,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="56px"
             android:rotation="180"
-            android:src="@drawable/marker" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/fenceMarker7"
-        android:layout_width="120px"
-        android:layout_height="120px"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/fenceMarker6"
-        app:layout_constraintEnd_toStartOf="@+id/fenceMarker6">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="56px"
-            android:rotation="270"
             android:src="@drawable/marker" />
     </LinearLayout>
 

@@ -63,13 +63,13 @@ public class VideoSender {
                             MediaType.parse(contentType), requestFile);
 
                     /**
-                     * {@link Constants#UPLOADED_FILE_X} name saved to server-side.
-                     * {@link Constants#TYPE_X} sends the Mime type to server-side.
+                     * {@link Constants#UPLOADED_FILE_P} name saved to server-side.
+                     * {@link Constants#TYPE_P} sends the Mime type to server-side.
                      */
                     RequestBody request_body = new MultipartBody.Builder()
                             .setType(MultipartBody.FORM)
-                            .addFormDataPart(Constants.TYPE_X, contentType)
-                            .addFormDataPart(Constants.UPLOADED_FILE_X, newFileName +
+                            .addFormDataPart(Constants.TYPE_P, contentType)
+                            .addFormDataPart(Constants.UPLOADED_FILE_P, newFileName +
                                     Constants.VIDEO_EXTENSION_F, file_body
                             ).build();
 

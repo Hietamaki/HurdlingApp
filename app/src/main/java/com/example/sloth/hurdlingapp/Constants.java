@@ -23,8 +23,15 @@ public class Constants {
     public final static String IS_EDITED_N = "edit" + SPACE_N;
     public final static String VIDEO_EXTENSION_N = SPACE_N + VIDEO_EXTENSION_F;
 
+    //PHP
+    public final static String UPLOADED_FILE_P = "uploaded_file";
+    public final static String TYPE_P = "type";
+
     //XML
-    public final static  String UPLOADED_FILE_X = "uploaded_file";
-    public final static  String TYPE_X = "type";
+    public final static String FENCE_MARKER_X = "fenceMarker";
+
+    //Lengths
+    public final static int FENCE_MARGIN_L = 56;
+    public final static int FENCE_SIZE_L = 8;
 
 }

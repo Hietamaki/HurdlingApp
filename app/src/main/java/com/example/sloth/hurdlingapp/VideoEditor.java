@@ -23,12 +23,14 @@ public class VideoEditor {
      * @param startPosition Is the start position of trim.
      * @param endPosition   Is the end position of trim.
      * @param videoPath     Is the name of the video.
+     * @param callback      Is the callback that is called when the video has been trimmed.
      * @return Edited video's name
      */
-    public String trimVideo(Activity activity, int startPosition, int endPosition, String videoPath) {
+    public String trimVideo(Activity activity, int startPosition, int endPosition, String videoPath,
+                            Runnable callback) {
         String[] parsedValues = NameParser.parseName(videoPath);
         return trimVideo(activity, startPosition, endPosition, Integer.valueOf(parsedValues[1]),
-                Integer.valueOf(parsedValues[4]), parsedValues[2], parsedValues[3]);
+                Integer.valueOf(parsedValues[4]), parsedValues[2], parsedValues[3], callback);
     }
 
     /**
@@ -39,11 +41,12 @@ public class VideoEditor {
      * @param fenceIndex       Shows what gap was recorded. Only used for renaming purpose.
      * @param fenceGap         Is the distance between fences. Only used for renaming purpose.
      * @param fenceHeight      Is the height of the fences. Only used for renaming purpose.
+     * @param callback         Is the callback that is called when the video has been trimmed.
      * @return Edited video's name
      */
     public String trimVideo(Activity activity, int startPosition, int endPosition,
-                          int videoUniqueIndex, int fenceIndex,
-                          String fenceGap, String fenceHeight) {
+                            int videoUniqueIndex, int fenceIndex,
+                            String fenceGap, String fenceHeight, final Runnable callback) {
 
         FFmpeg ffmpeg = FFmpeg.getInstance(activity);
 
@@ -126,7 +129,7 @@ public class VideoEditor {
 
                         @Override
                         public void onFinish() {
-
+                            callback.run();
                         }
                     });
         } catch (FFmpegCommandAlreadyRunningException e) {
