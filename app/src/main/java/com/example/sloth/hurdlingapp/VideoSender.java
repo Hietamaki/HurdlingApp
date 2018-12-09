@@ -58,27 +58,21 @@ public class VideoSender {
                 public void run() {
 
                     OkHttpClient client = new OkHttpClient();
-
-                    RequestBody file_body = RequestBody.create(
-                            MediaType.parse(contentType), requestFile);
-
                     /**
                      * {@link Constants#UPLOADED_FILE_P} name saved to server-side.
-                     * {@link Constants#TYPE_P} sends the Mime type to server-side.
                      */
-                    RequestBody request_body = new MultipartBody.Builder()
+                    RequestBody formBody = new MultipartBody.Builder()
                             .setType(MultipartBody.FORM)
-                            .addFormDataPart(Constants.TYPE_P, contentType)
-                            .addFormDataPart(Constants.UPLOADED_FILE_P, newFileName +
-                                    Constants.VIDEO_EXTENSION_F, file_body
-                            ).build();
+                            .addFormDataPart("file", newFileName +
+                                            Constants.VIDEO_EXTENSION_F,
+                                    RequestBody.create(MediaType.parse("text/plain"), requestFile))
+                            .build();
+                    Request request = new Request.Builder().url("http://192.168.43.244:5000/")
+                            .post(formBody).build();
 
                     //In server php script handles the request.
                     //TODO create more pleasant url in the future.
-                    Request request = new Request.Builder()
-                            .url("http://192.168.43.244/testing/save_file.php")
-                            .post(request_body).build();
-                    try {
+                   try {
                         Response response = client.newCall(request).execute();
                         if (!response.isSuccessful()) {
                             throw new IOException("ERROR : " + response);
