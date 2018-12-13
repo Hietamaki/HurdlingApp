@@ -7,6 +7,7 @@ import java.io.File;
 public class Constants {
     //SharedPreference keys
     public final static String INDEX_S = "index";
+    public final static String EDIT_INDEX_S = "editIndex";
 
     //Intent keys
     public final static String VIDEO_FILE_PATH_I = "video_file_path";

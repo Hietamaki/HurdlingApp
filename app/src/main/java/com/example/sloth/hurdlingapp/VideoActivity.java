@@ -30,8 +30,10 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.google.gson.Gson;
 
 import java.io.File;
+import java.util.jar.Attributes;
 
 public class VideoActivity extends Activity implements View.OnClickListener {
 
@@ -404,7 +406,24 @@ public class VideoActivity extends Activity implements View.OnClickListener {
      * Notice that local ip is hard coded.
      */
     public void uploadFile() {
-        VideoSender.Instance.fileUpload(this, new File(destination), "pholder");
+        VideoSender.Instance.fileUpload(this, new File(destination),
+                NameParser.createServerSideName(this), createJSON());
+    }
+
+    /**
+     * Creates a JSON that has version number, video's analysis data, search parameters.
+     * @return
+     */
+    public String createJSON()
+    {
+        Gson gson = new Gson();
+        String[] parsedValues = NameParser.parseName(videoPath);
+        SentVideoData videoData = new SentVideoData(parsedValues[2], parsedValues[3],
+                parsedValues[4], FenceMarkerParser.fenceMarkersToVideoCoordinates(fenceMarkers,
+                videoPath, playerView.getTop(), playerView.getRight(),
+                playerView.getBottom(), playerView.getLeft()), new String[]{"TestVer0.1"});
+        return gson.toJson(videoData);
+
     }
 
     /**

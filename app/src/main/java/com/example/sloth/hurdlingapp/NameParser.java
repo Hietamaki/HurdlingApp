@@ -43,7 +43,7 @@ public class NameParser {
     public static String createEditName(int oldUniqueIndex, int fenceIndex,
                                         String fenceGap, String fenceHeight, Activity activity) {
         StoredData storedData = new StoredData(activity);
-        return createEditName(oldUniqueIndex, storedData.getAndIncrementVideoIndex(),
+        return createEditName(oldUniqueIndex, storedData.getAndIncrementEditVideoIndex(),
                 fenceIndex, fenceGap, fenceHeight);
     }
 
@@ -64,8 +64,20 @@ public class NameParser {
     }
 
     /**
+     * Create a server-side name for the edited video. The name needs only Android unique id and
+     * unique id.
+     * @param activity
+     * @return
+     */
+    public static String createServerSideName(Activity activity)
+    {
+        StoredData storedData = new StoredData(activity);
+        return IdManager.getUniqueId(activity) + Constants.SPACE_N + storedData.getEditVideoIndex();
+    }
+
+    /**
      * Takes video path and chops it into pieces.
-     * Index 0: "video", a String.
+     * Index 0: ..."video", a String.
      * Index 1: uniqueIndex.
      * Index 2: fenceGap.
      * Index 3: fenceHeight.

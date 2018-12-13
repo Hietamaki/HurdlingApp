@@ -22,14 +22,14 @@ public class VideoSender {
     private Uri fileUri;
 
     /**
-     * Uploads a chosen file to server
+     * Uploads a chosen video file to server with data about the video
      *
      * @param activity    Is current activity.
      * @param requestFile Is the file that is wanted to be upload to server and for analysis.
      * @param newFileName Is the name for the file in server-side.
      */
-    public void fileUpload(Activity activity, final File requestFile, final String newFileName) {
-
+    public void fileUpload(Activity activity, final File requestFile, final String newFileName,
+                           final String json) {
         /*
          * Most file-related method calls need to be in
          * try-catch blocks.
@@ -66,6 +66,7 @@ public class VideoSender {
                             .addFormDataPart("file", newFileName +
                                             Constants.VIDEO_EXTENSION_F,
                                     RequestBody.create(MediaType.parse("text/plain"), requestFile))
+                            .addFormDataPart("json", json)
                             .build();
                     Request request = new Request.Builder().url("http://192.168.43.244:5000/")
                             .post(formBody).build();
