@@ -111,6 +111,10 @@ public class VideoActivity extends Activity implements View.OnClickListener {
     TextInputLayout startOfCutTextInputLayout;
 
 
+    //Search parameter that are sent to server so they can be used as search parameters in the DB.
+    TextInputLayout searchParameters;
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
@@ -178,6 +182,7 @@ public class VideoActivity extends Activity implements View.OnClickListener {
             }
         });
 
+        searchParameters = findViewById(R.id.textInputLayout6);
         startOfCutTextInputLayout = findViewById(R.id.textInputLayout3);
         startOfCutTextInputLayout.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
@@ -412,18 +417,27 @@ public class VideoActivity extends Activity implements View.OnClickListener {
 
     /**
      * Creates a JSON that has version number, video's analysis data, search parameters.
-     * @return
+     *
+     * @return the JSON string.
      */
-    public String createJSON()
-    {
+    public String createJSON() {
         Gson gson = new Gson();
         String[] parsedValues = NameParser.parseName(videoPath);
         SentVideoData videoData = new SentVideoData(parsedValues[2], parsedValues[3],
                 parsedValues[4], FenceMarkerParser.fenceMarkersToVideoCoordinates(fenceMarkers,
                 videoPath, playerView.getTop(), playerView.getRight(),
-                playerView.getBottom(), playerView.getLeft()), new String[]{"TestVer0.1"});
+                playerView.getBottom(), playerView.getLeft()), getSearchParameters());
         return gson.toJson(videoData);
 
+    }
+
+    /**
+     * get {@link #searchParameters}'s values as array. The value is split with ";" character.
+     *
+     * @return {@link #searchParameters}'s values as array.
+     */
+    String[] getSearchParameters() {
+        return searchParameters.getEditText().getText().toString().split(",");
     }
 
     /**

@@ -12,4 +12,5 @@
     <string name="StartPosition">Alkupiste</string>
     <string name="EndPosition">Loppupiste</string>
     <string name="CutAndSend">Leikkaa ja lähetä</string>
+    <string name="SearchParameters">Lisää hakuparametrit</string>
 </resources>
