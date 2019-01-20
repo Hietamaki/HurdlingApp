@@ -192,7 +192,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
                         new File(Environment.getExternalStorageDirectory() +
                                 Constants.VIDEO_FOLDER_F, NameParser.createVideoName(
                                 storedData.getAndIncrementVideoIndex(),
-                                fenceIndex, fenceGap, fenceHeight)));
+                                getFenceIndex(), getFenceGap(), getFenceHeight())));
                 //Increment unique videoIndex and store it.
                 //Will increment even if video recording fails.
                 //Display changes in the video name.
