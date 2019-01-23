@@ -38,7 +38,7 @@ public class FenceMarkerParser {
         //Notice that it will loop only 4 times.
         for (int i = 0; i < fenceMarkerViews.length / 2; i++) {
             /**
-             * {@link #getFenceMarkerXCoordinate} and {@link #getFenceMarkerXOffset(int)}
+             * {@link #getFenceMarkerXCoordinate} and {@link #getFenceMarkerOffset()}
              * There are same methods for the Y coordinate.
              *
              * Check if the coordinates are wrong way around.
@@ -47,20 +47,20 @@ public class FenceMarkerParser {
              */
             if (fenceMarkerViews[i].getX() > fenceMarkerViews[i + 4].getX()) {
                 fenceMarkers[i][0] = getFenceMarkerXCoordinate(width, left, right,
-                        fenceMarkerViews[i + 4].getX() + getFenceMarkerXOffset(i + 4));
+                        fenceMarkerViews[i + 4].getX() + getFenceMarkerOffset());
                 fenceMarkers[i + 4][0] = getFenceMarkerXCoordinate(width, left, right,
-                        fenceMarkerViews[i].getX() + getFenceMarkerXOffset(i));
+                        fenceMarkerViews[i].getX() + getFenceMarkerOffset());
             } else {
                 fenceMarkers[i][0] = getFenceMarkerXCoordinate(width, left, right,
-                        fenceMarkerViews[i].getX() + getFenceMarkerXOffset(i));
+                        fenceMarkerViews[i].getX() + getFenceMarkerOffset());
                 fenceMarkers[i + 4][0] = getFenceMarkerXCoordinate(width, left, right,
-                        fenceMarkerViews[i + 4].getX() + getFenceMarkerXOffset(i + 4));
+                        fenceMarkerViews[i + 4].getX() + getFenceMarkerOffset());
             }
 
             fenceMarkers[i][1] = getFenceMarkerYCoordinate(height, top, bottom,
-                    fenceMarkerViews[i].getY() + getFenceMarkerYOffset(i));
+                    fenceMarkerViews[i].getY() + getFenceMarkerOffset());
             fenceMarkers[i + 4][1] = getFenceMarkerYCoordinate(height, top, bottom,
-                    fenceMarkerViews[i + 4].getY() + getFenceMarkerYOffset(i + 4));
+                    fenceMarkerViews[i + 4].getY() + getFenceMarkerOffset());
 
         }
         return fenceMarkers;
@@ -93,33 +93,11 @@ public class FenceMarkerParser {
     }
 
     /**
-     * Gets the width between fence marker's left corner and arrow's tip.
-     * Notice that every other of the fence markers point to right.
+     * Gets the width/height between fence marker's left corner and arrow's tip.
      *
-     * @param i Is fence marker's index.
      * @return Width between fence marker's left corner and arrow's tip.
      */
-    private static int getFenceMarkerXOffset(int i) {
-        int offset = Constants.FENCE_MARGIN_L;
-        if (i == 1 % 2) {
-            offset += Constants.FENCE_SIZE_L;
-        }
-        return offset;
-    }
-
-    /**
-     * Gets the height between fence marker's top corner and arrow's tip.
-     * Notice that with left markers two first fence marker's point up and two last point down.
-     * Notice that with right markers two first fence marker's point up and two last point down.
-     *
-     * @param i Is fence marker's index.
-     * @return Height between fence marker's top corner and arrow's tip.
-     */
-    private static int getFenceMarkerYOffset(int i) {
-        int offset = Constants.FENCE_MARGIN_L;
-        if (i >= 2 % 4) {
-            offset += Constants.FENCE_SIZE_L;
-        }
-        return offset;
+    private static int getFenceMarkerOffset() {
+        return Constants.FENCE_MARKER_CENTER;
     }
 }

@@ -32,7 +32,6 @@ public class Constants {
     public final static String FENCE_MARKER_X = "fenceMarker";
 
     //Lengths
-    public final static int FENCE_MARGIN_L = 56;
-    public final static int FENCE_SIZE_L = 8;
+    public final static int FENCE_MARKER_CENTER = 32;
 
 }

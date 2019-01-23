@@ -134,7 +134,6 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="56px"
             android:src="@drawable/marker" />
     </LinearLayout>
 
@@ -150,7 +149,6 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="56px"
             android:rotation="90"
             android:src="@drawable/marker" />
     </LinearLayout>
@@ -169,7 +167,6 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="56px"
             android:rotation="270"
             android:src="@drawable/marker" />
     </LinearLayout>
@@ -185,7 +182,6 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="56px"
             android:rotation="180"
             android:src="@drawable/marker" />
     </LinearLayout>
@@ -202,7 +198,6 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="56px"
             android:src="@drawable/marker" />
     </LinearLayout>
 
@@ -221,7 +216,6 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="56px"
             android:rotation="90"
             android:src="@drawable/marker" />
     </LinearLayout>
@@ -238,7 +232,6 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="56px"
             android:rotation="270"
             android:src="@drawable/marker" />
     </LinearLayout>
@@ -254,7 +247,6 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="56px"
             android:rotation="180"
             android:src="@drawable/marker" />
     </LinearLayout>
