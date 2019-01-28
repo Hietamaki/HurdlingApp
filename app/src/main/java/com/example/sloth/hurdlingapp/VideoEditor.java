@@ -39,14 +39,14 @@ public class VideoEditor {
      * @param endPosition      Is the end position of trim.
      * @param videoUniqueIndex Is source's unique index. Only used for renaming purpose.
      * @param fenceIndex       Shows what gap was recorded. Only used for renaming purpose.
-     * @param fenceGap         Is the distance between fences. Only used for renaming purpose.
+     * @param fenceSpacing         Is the distance between fences. Only used for renaming purpose.
      * @param fenceHeight      Is the height of the fences. Only used for renaming purpose.
      * @param callback         Is the callback that is called when the video has been trimmed.
      * @return Edited video's name
      */
     public String trimVideo(Activity activity, int startPosition, int endPosition,
                             int videoUniqueIndex, int fenceIndex,
-                            String fenceGap, String fenceHeight, final Runnable callback) {
+                            String fenceSpacing, String fenceHeight, final Runnable callback) {
 
         FFmpeg ffmpeg = FFmpeg.getInstance(activity);
 
@@ -86,7 +86,7 @@ public class VideoEditor {
             String source =
                     Environment.getExternalStorageDirectory().toString() + Constants.VIDEO_FOLDER_F
                             + "/" + NameParser.createVideoName(videoUniqueIndex, fenceIndex,
-                            fenceGap, fenceHeight);
+                            fenceSpacing, fenceHeight);
 
             //Destination of the edited file.
             //External storage directory + videos + "/" + edited video's name.
@@ -94,7 +94,7 @@ public class VideoEditor {
             destination =
                     Environment.getExternalStorageDirectory() + Constants.EDITED_FOLDER_F +
                             "/" + NameParser.createEditName(videoUniqueIndex, fenceIndex,
-                            fenceGap, fenceHeight, activity);
+                            fenceSpacing, fenceHeight, activity);
 
             // to execute "ffmpeg -version" command you just need to pass "-version"
             //"-i" is input file url

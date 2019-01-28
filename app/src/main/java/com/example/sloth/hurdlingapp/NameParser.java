@@ -21,13 +21,13 @@ public class NameParser {
      *
      * @param uniqueIndex Unique value for the name. To separate it from other names.
      * @param fenceIndex  Which gap it is.
-     * @param fenceGap    Value for the distance between fences.
+     * @param fenceSpacing    Value for the distance between fences.
      * @param fenceHeight Value for the height of the fence.
      * @return The video's name.
      */
     public static String createVideoName(int uniqueIndex, int fenceIndex,
-                                         String fenceGap, String fenceHeight) {
-        return video_ + uniqueIndex + s + fenceGap + s + fenceHeight + s + fenceIndex + extension;
+                                         String fenceSpacing, String fenceHeight) {
+        return video_ + uniqueIndex + s + fenceSpacing + s + fenceHeight + s + fenceIndex + extension;
     }
 
     /**
@@ -35,16 +35,16 @@ public class NameParser {
      *
      * @param oldUniqueIndex Source's unique value for the name. To separate it from other sources.
      * @param fenceIndex     Which gap it is.
-     * @param fenceGap       Value for the distance between fences.
+     * @param fenceSpacing       Value for the distance between fences.
      * @param fenceHeight    Value for the height of the fence.
      * @param activity       Activity is needed for generating new unique index.
      * @return The video's name.
      */
     public static String createEditName(int oldUniqueIndex, int fenceIndex,
-                                        String fenceGap, String fenceHeight, Activity activity) {
+                                        String fenceSpacing, String fenceHeight, Activity activity) {
         StoredData storedData = new StoredData(activity);
         return createEditName(oldUniqueIndex, storedData.getAndIncrementEditVideoIndex(),
-                fenceIndex, fenceGap, fenceHeight);
+                fenceIndex, fenceSpacing, fenceHeight);
     }
 
     /**
@@ -53,13 +53,13 @@ public class NameParser {
      * @param oldUniqueIndex Source's unique value for the name. To separate it from other sources.
      * @param newUniqueIndex Target's unique value for the name. To separate it from other targets.
      * @param fenceIndex     Which gap it is.
-     * @param fenceGap       Value for the distance between fences.
+     * @param fenceSpacing       Value for the distance between fences.
      * @param fenceHeight    Value for the height of the fence.
      * @return The video's name.
      */
     public static String createEditName(int oldUniqueIndex, int newUniqueIndex, int fenceIndex,
-                                        String fenceGap, String fenceHeight) {
-        return edit_ + oldUniqueIndex + s + newUniqueIndex + s + fenceGap + s + fenceHeight
+                                        String fenceSpacing, String fenceHeight) {
+        return edit_ + oldUniqueIndex + s + newUniqueIndex + s + fenceSpacing + s + fenceHeight
                 + s + fenceIndex + extension;
     }
 
@@ -79,7 +79,7 @@ public class NameParser {
      * Takes video path and chops it into pieces.
      * Index 0: ..."video", a String.
      * Index 1: uniqueIndex.
-     * Index 2: fenceGap.
+     * Index 2: fenceSpacing.
      * Index 3: fenceHeight.
      * Index 4: fenceIndex.
      * Index 5: ".mp4", a String

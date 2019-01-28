@@ -6,7 +6,7 @@
     <string name="Gap12">Aitaväli 1-2</string>
     <string name="Gap23">Aitaväli 2-3</string>
     <string name="Gap34">Aitaväli 3-4</string>
-    <string name="FenceGap">Aitavälin pituus senttimetreinä</string>
+    <string name="FenceSpacing">Aitavälin pituus senttimetreinä</string>
     <string name="FenceHeight">Aitavälin korkeus senttimetreinä</string>
     <string name="SavedFileName">Tiedosto tallennetaan nimellä: </string>
     <string name="StartPosition">Alkupiste</string>

@@ -43,7 +43,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
     private int videoIndex;
     private int fenceIndex;
     private String fenceHeight;
-    private String fenceGap;
+    private String fenceSpacing;
 
     /**
      * Get an unique value for the name. To separate it from other names.
@@ -104,17 +104,17 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
      *
      * @return Value for the distance between fences.
      */
-    public String getFenceGap() {
-        return fenceGap;
+    public String getFenceSpacing() {
+        return fenceSpacing;
     }
 
     /**
      * Set a value for the distance between fences.
      *
-     * @param fenceGap Value for the distance between fences.
+     * @param fenceSpacing Value for the distance between fences.
      */
-    public void setFenceGap(String fenceGap) {
-        this.fenceGap = fenceGap;
+    public void setFenceSpacing(String fenceSpacing) {
+        this.fenceSpacing = fenceSpacing;
     }
 
     @Override
@@ -153,12 +153,12 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
 
             @Override
             public void afterTextChanged(Editable s) {
-                setFenceGap(fenceHeightInputLayout.getEditText().getText().toString());
+                setFenceSpacing(fenceHeightInputLayout.getEditText().getText().toString());
                 changeTextView();
             }
         });
-        final TextInputLayout fenceGapInputLayout = findViewById(R.id.textInputLayout2);
-        fenceGapInputLayout.getEditText().addTextChangedListener(new TextWatcher() {
+        final TextInputLayout fenceSpacingInputLayout = findViewById(R.id.textInputLayout2);
+        fenceSpacingInputLayout.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -171,7 +171,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
 
             @Override
             public void afterTextChanged(Editable s) {
-                setFenceHeight(fenceGapInputLayout.getEditText().getText().toString());
+                setFenceHeight(fenceSpacingInputLayout.getEditText().getText().toString());
                 changeTextView();
             }
         });
@@ -192,7 +192,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
                         new File(Environment.getExternalStorageDirectory() +
                                 Constants.VIDEO_FOLDER_F, NameParser.createVideoName(
                                 storedData.getAndIncrementVideoIndex(),
-                                getFenceIndex(), getFenceGap(), getFenceHeight())));
+                                getFenceIndex(), getFenceSpacing(), getFenceHeight())));
                 //Increment unique videoIndex and store it.
                 //Will increment even if video recording fails.
                 //Display changes in the video name.
@@ -245,7 +245,7 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
      */
     private void changeTextView() {
         videoNameTextView.setText(getString(R.string.SavedFileName)
-                + NameParser.createVideoName(videoIndex, fenceIndex, fenceGap, fenceHeight));
+                + NameParser.createVideoName(videoIndex, fenceIndex, fenceSpacing, fenceHeight));
     }
 }
 

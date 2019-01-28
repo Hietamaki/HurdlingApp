@@ -8,13 +8,13 @@ public class SentVideoData {
      */
     private final int version = 1;
     /**
-     * {@link #fenceGap}
+     * {@link #fenceSpacing}
      * {@link #fenceHeight}
      * {@link #fenceIndex}
      * {@link #cornerLocations}
      * These are needed for the analysis script.
      */
-    private String fenceGap;
+    private String fenceSpacing;
     private String fenceHeight;
     private String fenceIndex;
     private int[][] cornerLocations = new int[8][2];
@@ -24,17 +24,17 @@ public class SentVideoData {
      */
     private String[] searchParameters;
 
-    public SentVideoData(String fenceGap, String fenceHeight, String fenceIndex,
+    public SentVideoData(String fenceSpacing, String fenceHeight, String fenceIndex,
                          int[][] cornerLocations, String[] searchParameters) {
-        setFenceGap(fenceGap);
+        setFenceSpacing(fenceSpacing);
         setFenceHeight(fenceHeight);
         setFenceIndex(fenceIndex);
         setCornerLocations(cornerLocations);
         setSearchParameters(searchParameters);
     }
 
-    public void setFenceGap(String fenceGap) {
-        this.fenceGap = fenceGap;
+    public void setFenceSpacing(String fenceSpacing) {
+        this.fenceSpacing = fenceSpacing;
     }
 
     public void setFenceHeight(String fenceHeight) {
