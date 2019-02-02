@@ -22,7 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </FrameLayout>
+    </FrameLayout>>
 
 
     <LinearLayout
@@ -88,7 +88,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/dragBackground1"
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -116,6 +116,16 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/SearchParameters" />
         </android.support.design.widget.TextInputLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dragBackground1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
 
     </LinearLayout>
 
