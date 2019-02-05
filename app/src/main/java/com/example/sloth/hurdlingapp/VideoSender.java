@@ -8,6 +8,7 @@ import android.webkit.MimeTypeMap;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -56,8 +57,11 @@ public class VideoSender {
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
-
-                    OkHttpClient client = new OkHttpClient();
+                    //Creates a client that timeouts in 300 seconds instead of the default 10 seconds
+                    //Has now enough wait time that the analysis can finish in time.
+                    OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+                    clientBuilder.readTimeout(300, TimeUnit.SECONDS);
+                    OkHttpClient client = clientBuilder.build();
                     /**
                      * {@link Constants#UPLOADED_FILE_P} name saved to server-side.
                      */
@@ -77,6 +81,11 @@ public class VideoSender {
                         Response response = client.newCall(request).execute();
                         if (!response.isSuccessful()) {
                             throw new IOException("ERROR : " + response);
+                        }
+                        else
+                        {
+                            //Prints a log after the server has returned it.
+                            Log.d("hello", "Here is the response: " + response.body().string());
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
