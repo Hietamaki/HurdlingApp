@@ -3,6 +3,7 @@ package com.example.sloth.hurdlingapp;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -350,30 +351,24 @@ public class VideoActivity extends Activity implements View.OnClickListener {
 
     }
 
+    //Background has drag listener.
     class MyDragListener implements View.OnDragListener {
         @Override
         public boolean onDrag(View v, DragEvent event) {
             switch (event.getAction()) {
-                case DragEvent.ACTION_DRAG_STARTED:
-                    // do nothing
-                    break;
-                case DragEvent.ACTION_DRAG_ENTERED:
-
-                    break;
-                case DragEvent.ACTION_DRAG_EXITED:
-
-                    break;
                 case DragEvent.ACTION_DROP:
                     // Dropped, reassign View to ViewGroup
                     float x = event.getX();
                     float y = event.getY();
                     View view = (View) event.getLocalState();
                     view.setVisibility(View.VISIBLE);
-                    view.setY(y - ((float) view.getHeight() / 2));
-                    view.setX(x - ((float) view.getWidth() / 2));
-                    break;
-                case DragEvent.ACTION_DRAG_ENDED:
 
+                    //On drag start offset (Point) is saved in ClipData (String) format.
+                    //Parse it back to Point.
+                    CoordinatePoint offset = CoordinatePoint.Companion.parsePoint(event.getClipData()
+                            .getItemAt(0).coerceToHtmlText(getApplicationContext()));
+                    view.setY(y + -offset.y);
+                    view.setX(x + -offset.x);
                 default:
                     break;
             }
@@ -383,11 +378,33 @@ public class VideoActivity extends Activity implements View.OnClickListener {
 
     // Touch listener for dragging.
     private final class MyTouchListener implements View.OnTouchListener {
+
+        private class CustomDragShadowBuilder extends View.DragShadowBuilder {
+
+            //Offset for the touch.
+            private CoordinatePoint offset;
+
+            public CustomDragShadowBuilder(View view, CoordinatePoint offset) {
+                super(view);
+                this.offset = offset;
+            }
+            //Defines a callback that sends the drag shadow dimensions and touch point back to the system.
+            @Override
+            public void onProvideShadowMetrics(Point size, Point touch) {
+                size.set(getView().getWidth(), getView().getHeight());
+                //Sets the touch point's position to be in the middle of the drag shadow.
+                touch.set(offset.x, offset.y);
+            }
+        }
+
+
         public boolean onTouch(View view, MotionEvent motionEvent) {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                ClipData data = ClipData.newPlainText("", "");
-                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(
-                        view);
+                CoordinatePoint offset = new CoordinatePoint((int) motionEvent.getX(), (int) motionEvent.getY());
+                //Store the offset for the end of offset.
+                ClipData data = ClipData.newPlainText("offset", offset.toString());
+                View.DragShadowBuilder shadowBuilder = new CustomDragShadowBuilder(
+                        view, offset);
                 view.startDrag(data, shadowBuilder, view, 0);
                 view.setVisibility(View.INVISIBLE);
                 return true;
