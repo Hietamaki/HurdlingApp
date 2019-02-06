@@ -230,6 +230,8 @@ public class VideoActivity extends Activity implements View.OnClickListener {
                 } else {
                     valueChanged = false;
                 }
+                //When rangebar changed. Change seekbar position.
+                player.seekTo(getVideoValue(leftThumbValue));
             }
 
             @Override
@@ -285,6 +287,8 @@ public class VideoActivity extends Activity implements View.OnClickListener {
                 } else {
                     valueChanged = false;
                 }
+                //When rangebar changed. Change seekbar position.
+                player.seekTo(getVideoValue(rightThumbValue));
             }
 
             @Override
