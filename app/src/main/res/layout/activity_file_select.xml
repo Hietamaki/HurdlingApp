@@ -5,10 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    android:maxHeight="1000dp"
-    android:maxWidth="1000dp"
-    android:minHeight="0dp"
-    android:minWidth="0dp"
     android:orientation="horizontal"
     tools:context=".RecordingSettingsActivity">
 
@@ -17,10 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@color/colorLightBackground"
         android:cacheColorHint="@android:color/holo_blue_dark"
         android:clickable="false"
-        android:divider="@android:drawable/btn_dialog"
+        android:divider="@android:drawable/divider_horizontal_textfield"
         android:entries="@android:drawable/alert_dark_frame"
         android:focusable="false"
         android:footerDividersEnabled="false"
