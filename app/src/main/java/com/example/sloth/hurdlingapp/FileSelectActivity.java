@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -57,9 +58,20 @@ public class FileSelectActivity extends Activity {
 
         mVideoFiles = mVideosDir.listFiles();
         mVideoFilename = new String[mVideoFiles.length];
+        int videoCount = 0;
         for (int i = 0; i < mVideoFiles.length; i++) {
-            mVideoFilename[i] = new String(mVideoFiles[i].getName());
-
+            if(NameParser.isVideo(mVideoFiles[i].getName()))
+            {
+                mVideoFilename[videoCount] = mVideoFiles[i].getName();
+                videoCount++;
+            }
+        }
+        for (int i = 0; i < mVideoFiles.length; i++) {
+            if(!NameParser.isVideo(mVideoFiles[i].getName()))
+            {
+                mVideoFilename[videoCount] = mVideoFiles[i].getName();
+                videoCount++;
+            }
         }
 
         // Set the Activity's result to null to begin with

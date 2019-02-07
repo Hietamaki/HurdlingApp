@@ -19,10 +19,10 @@ public class NameParser {
     /**
      * Creates a name for the video.
      *
-     * @param uniqueIndex Unique value for the name. To separate it from other names.
-     * @param fenceIndex  Which gap it is.
-     * @param fenceSpacing    Value for the distance between fences.
-     * @param fenceHeight Value for the height of the fence.
+     * @param uniqueIndex  Unique value for the name. To separate it from other names.
+     * @param fenceIndex   Which gap it is.
+     * @param fenceSpacing Value for the distance between fences.
+     * @param fenceHeight  Value for the height of the fence.
      * @return The video's name.
      */
     public static String createVideoName(int uniqueIndex, int fenceIndex,
@@ -35,7 +35,7 @@ public class NameParser {
      *
      * @param oldUniqueIndex Source's unique value for the name. To separate it from other sources.
      * @param fenceIndex     Which gap it is.
-     * @param fenceSpacing       Value for the distance between fences.
+     * @param fenceSpacing   Value for the distance between fences.
      * @param fenceHeight    Value for the height of the fence.
      * @param activity       Activity is needed for generating new unique index.
      * @return The video's name.
@@ -53,7 +53,7 @@ public class NameParser {
      * @param oldUniqueIndex Source's unique value for the name. To separate it from other sources.
      * @param newUniqueIndex Target's unique value for the name. To separate it from other targets.
      * @param fenceIndex     Which gap it is.
-     * @param fenceSpacing       Value for the distance between fences.
+     * @param fenceSpacing   Value for the distance between fences.
      * @param fenceHeight    Value for the height of the fence.
      * @return The video's name.
      */
@@ -66,11 +66,11 @@ public class NameParser {
     /**
      * Create a server-side name for the edited video. The name needs only Android unique id and
      * unique id.
+     *
      * @param activity
      * @return
      */
-    public static String createServerSideName(Activity activity)
-    {
+    public static String createServerSideName(Activity activity) {
         StoredData storedData = new StoredData(activity);
         return IdManager.getUniqueId(activity) + Constants.SPACE_N + storedData.getEditVideoIndex();
     }
@@ -90,5 +90,15 @@ public class NameParser {
      */
     public static String[] parseName(String name) {
         return name.split(s);
+    }
+
+    /**
+     * Check if name string starts with video or with something else
+     * @param name is name string
+     * @return true if starts with "video".
+     */
+    public static boolean isVideo(String name) {
+        String[] strings = parseName(name);
+        return strings[0].equals("video");
     }
 }
