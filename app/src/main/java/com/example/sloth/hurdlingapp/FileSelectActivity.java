@@ -59,14 +59,14 @@ public class FileSelectActivity extends Activity {
         mVideoFiles = mVideosDir.listFiles();
         mVideoFilename = new String[mVideoFiles.length];
         int videoCount = 0;
-        for (int i = 0; i < mVideoFiles.length; i++) {
+        for (int i = (mVideoFiles.length - 1); i >= 0; i--) {
             if(NameParser.isVideo(mVideoFiles[i].getName()))
             {
                 mVideoFilename[videoCount] = mVideoFiles[i].getName();
                 videoCount++;
             }
         }
-        for (int i = 0; i < mVideoFiles.length; i++) {
+        for (int i = (mVideoFiles.length - 1); i >= 0; i--) {
             if(!NameParser.isVideo(mVideoFiles[i].getName()))
             {
                 mVideoFilename[videoCount] = mVideoFiles[i].getName();
