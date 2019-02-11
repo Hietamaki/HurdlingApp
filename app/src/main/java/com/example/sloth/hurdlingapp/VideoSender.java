@@ -70,7 +70,7 @@ public class VideoSender {
                             .addFormDataPart("file", newFileName +
                                             Constants.VIDEO_EXTENSION_F,
                                     RequestBody.create(MediaType.parse("text/plain"), requestFile))
-                            .addFormDataPart("json", json)
+                            .addFormDataPart("json","json", RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json))
                             .build();
                     Request request = new Request.Builder().url("http://192.168.43.244:5000/")
                             .post(formBody).build();
