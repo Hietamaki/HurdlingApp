@@ -10,9 +10,10 @@ import java.io.File;
  */
 public class NameParser {
 
-    private static final String video_ = Constants.IS_VIDEO_N;
-    private static final String edit_ = Constants.IS_EDITED_N;
     private static final String s = Constants.SPACE_N;
+    private static final String video = Constants.IS_VIDEO_N ;
+    private static final String edit = Constants.IS_EDITED_N;
+    private static final String analysis = Constants.ANALYSIS_FOLDER_NAME_F;
     private static final String extension = Constants.VIDEO_EXTENSION_N;
 
 
@@ -27,7 +28,8 @@ public class NameParser {
      */
     public static String createVideoName(int uniqueIndex, int fenceIndex,
                                          String fenceSpacing, String fenceHeight) {
-        return video_ + uniqueIndex + s + fenceSpacing + s + fenceHeight + s + fenceIndex + extension;
+        return video + s + uniqueIndex + s + fenceSpacing + s + fenceHeight + s + fenceIndex
+                + extension;
     }
 
     /**
@@ -59,7 +61,7 @@ public class NameParser {
      */
     public static String createEditName(int oldUniqueIndex, int newUniqueIndex, int fenceIndex,
                                         String fenceSpacing, String fenceHeight) {
-        return edit_ + oldUniqueIndex + s + newUniqueIndex + s + fenceSpacing + s + fenceHeight
+        return edit + s + oldUniqueIndex + s + newUniqueIndex + s + fenceSpacing + s + fenceHeight
                 + s + fenceIndex + extension;
     }
 
@@ -95,10 +97,20 @@ public class NameParser {
     /**
      * Check if name string starts with video or with something else
      * @param name is name string
-     * @return true if starts with "video".
+     * @return true if starts with "video"
      */
     public static boolean isVideo(String name) {
         String[] strings = parseName(name);
-        return strings[0].equals("video");
+        return strings[0].equals(video);
+    }
+
+    /**
+     * Check if name string starts with analysis or with something else
+     * @param name is name string
+     * @return true if starts with "analysis"
+     */
+    public static boolean isAnalysis(String name) {
+        String[] strings = parseName(name);
+        return strings[0].equals(analysis);
     }
 }

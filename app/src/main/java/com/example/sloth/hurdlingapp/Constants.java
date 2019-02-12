@@ -23,8 +23,8 @@ public class Constants {
 
     //NameParser
     public final static String SPACE_N = "_";
-    public final static String IS_VIDEO_N = "video" + SPACE_N;
-    public final static String IS_EDITED_N = "edit" + SPACE_N;
+    public final static String IS_VIDEO_N = "video";
+    public final static String IS_EDITED_N = "edit";
     public final static String VIDEO_EXTENSION_N = SPACE_N + VIDEO_EXTENSION_F;
 
     //PHP
