@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.EmptyStackException;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -26,7 +27,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class FileSelectActivity extends Activity {
-    private Intent mResultIntent;
     // The path to the root of this app's internal storage
     private File mPrivateRootDir;
     // The path to the "Videos" subdirectory
@@ -35,6 +35,9 @@ public class FileSelectActivity extends Activity {
     File[] mVideoFiles;
     // Array of filenames corresponding to mVideoFiles
     String[] mVideoFilename;
+    // Type of file select we are on.
+    // Can be currently analysis or video type
+    String fileSelectType;
 
     private ListView mFileListView;
     private Uri fileUri;
@@ -44,15 +47,14 @@ public class FileSelectActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_select);
-
-
-        // Set up an Intent to send back to apps that request a file
-        mResultIntent = new Intent("com.example.sloth.hurdlingapp.ACTION_RETURN_FILE");
+        //Gets intent from the menu
+        Intent intent = getIntent();
+        fileSelectType = intent.getStringExtra(Constants.FILE_SELECT_TYPE_I);
         // Get the files/ subdirectory of internal storage
         mPrivateRootDir = Environment.getExternalStorageDirectory();
 
-        // Get the files/Videos subdirectory;
-        mVideosDir = new File(mPrivateRootDir, "videos");
+        // Get the files/$fileSelectType subdirectory;
+        mVideosDir = new File(mPrivateRootDir, fileSelectType);
 
         // Get the files in the Videos subdirectory
 
@@ -60,15 +62,13 @@ public class FileSelectActivity extends Activity {
         mVideoFilename = new String[mVideoFiles.length];
         int videoCount = 0;
         for (int i = (mVideoFiles.length - 1); i >= 0; i--) {
-            if(NameParser.isVideo(mVideoFiles[i].getName()))
-            {
+            if (NameParser.isVideo(mVideoFiles[i].getName())) {
                 mVideoFilename[videoCount] = mVideoFiles[i].getName();
                 videoCount++;
             }
         }
         for (int i = (mVideoFiles.length - 1); i >= 0; i--) {
-            if(!NameParser.isVideo(mVideoFiles[i].getName()))
-            {
+            if (!NameParser.isVideo(mVideoFiles[i].getName())) {
                 mVideoFilename[videoCount] = mVideoFiles[i].getName();
                 videoCount++;
             }
@@ -127,8 +127,24 @@ public class FileSelectActivity extends Activity {
 
 
                     //TODO check if legit name
-                    Intent intent = new Intent(FileSelectActivity.this,
-                            VideoActivity.class);
+                    Intent intent;
+                    switch (fileSelectType) {
+                        //Starts video editor activity
+                        case Constants.VIDEO_FOLDER_NAME_F:
+                            intent = new Intent(FileSelectActivity.this,
+                                    VideoActivity.class);
+                            break;
+                        //TODO When analysis activity is done, replace it with this.
+                        //Starts analysis activity
+                        case Constants.ANALYSIS_FOLDER_NAME_F:
+                            intent = new Intent(FileSelectActivity.this,
+                                    VideoActivity.class);
+                            break;
+                        default:
+                            throw new EmptyStackException();
+
+                    }
+                    //Add selected file path to the next activity
                     intent.putExtra(Constants.VIDEO_FILE_PATH_I, requestFile.getPath());
                     startActivity(intent);
                 }

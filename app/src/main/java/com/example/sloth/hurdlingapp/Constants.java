@@ -11,11 +11,14 @@ public class Constants {
 
     //Intent keys
     public final static String VIDEO_FILE_PATH_I = "video_file_path";
+    public final static String FILE_SELECT_TYPE_I = "file_select_type";
 
     //Files
     public final static String PROVIDER_EXTENSION_F = ".provider";
-    public final static String VIDEO_FOLDER_F = "/videos";
-    public final static String EDITED_FOLDER_F = "/videos";
+    public final static String VIDEO_FOLDER_NAME_F = "videos";
+    public final static String VIDEO_FOLDER_F = "/" + VIDEO_FOLDER_NAME_F;
+    public final static String ANALYSIS_FOLDER_NAME_F = "analysis";
+    public final static String ANALYSIS_FOLDER_F = "/" + ANALYSIS_FOLDER_NAME_F;
     public final static String VIDEO_EXTENSION_F = ".mp4";
 
     //NameParser

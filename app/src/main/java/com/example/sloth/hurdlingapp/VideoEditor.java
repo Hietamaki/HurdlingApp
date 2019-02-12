@@ -92,7 +92,7 @@ public class VideoEditor {
             //External storage directory + videos + "/" + edited video's name.
             //createEditName will increase video unique index by one.
             destination =
-                    Environment.getExternalStorageDirectory() + Constants.EDITED_FOLDER_F +
+                    Environment.getExternalStorageDirectory() + Constants.ANALYSIS_FOLDER_F +
                             "/" + NameParser.createEditName(videoUniqueIndex, fenceIndex,
                             fenceSpacing, fenceHeight, activity);
 

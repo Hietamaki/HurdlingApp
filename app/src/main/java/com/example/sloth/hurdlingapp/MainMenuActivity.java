@@ -59,22 +59,26 @@ public class MainMenuActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.button:
                 //Pressing recordMenuButton starts RecordingSettingsActivity.
-                Intent intent = new Intent(MainMenuActivity.this, RecordingSettingsActivity.class);
+                intent = new Intent(MainMenuActivity.this, RecordingSettingsActivity.class);
                 startActivity(intent);
                 break;
 
             case R.id.button2:
-                //Pressing sendMenuButton starts RecordingSettingsActivity.
-                Intent intent2 = new Intent(MainMenuActivity.this, FileSelectActivity.class);
-                startActivity(intent2);
+                //Pressing sendMenuButton starts file select for video editing activity.
+                intent = new Intent(MainMenuActivity.this, FileSelectActivity.class);
+                intent.putExtra(Constants.FILE_SELECT_TYPE_I, Constants.VIDEO_FOLDER_NAME_F);
+                startActivity(intent);
                 break;
 
             case R.id.button3:
-                //Pressing watchMenuButton.
-
+                //Pressing watchMenuButton starts file select for analysis activity.
+                intent = new Intent(MainMenuActivity.this, FileSelectActivity.class);
+                intent.putExtra(Constants.FILE_SELECT_TYPE_I, Constants.ANALYSIS_FOLDER_NAME_F);
+                startActivity(intent);
 
                 break;
 
