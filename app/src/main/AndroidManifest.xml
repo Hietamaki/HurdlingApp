@@ -27,6 +27,9 @@
         <activity android:name=".VideoActivity"
             android:screenOrientation="landscape">
         </activity>
+        <activity android:name=".AnalysisActivity"
+            android:screenOrientation="landscape">
+        </activity>
         <activity android:name=".RecordingSettingsActivity"
             android:screenOrientation="landscape">
             <intent-filter>

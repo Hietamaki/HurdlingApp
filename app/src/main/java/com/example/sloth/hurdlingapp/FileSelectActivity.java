@@ -138,7 +138,7 @@ public class FileSelectActivity extends Activity {
                         //Starts analysis activity
                         case Constants.ANALYSIS_FOLDER_NAME_F:
                             intent = new Intent(FileSelectActivity.this,
-                                    VideoActivity.class);
+                                    AnalysisActivity.class);
                             break;
                         default:
                             throw new EmptyStackException();
