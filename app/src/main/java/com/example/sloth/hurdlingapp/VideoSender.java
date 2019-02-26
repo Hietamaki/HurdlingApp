@@ -72,7 +72,7 @@ public class VideoSender {
                                     RequestBody.create(MediaType.parse("text/plain"), requestFile))
                             .addFormDataPart("json","json", RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json))
                             .build();
-                    Request request = new Request.Builder().url("http://192.168.43.244:5000/")
+                    Request request = new Request.Builder().url(Constants.URL_SERVER)
                             .post(formBody).build();
 
                     //In server php script handles the request.

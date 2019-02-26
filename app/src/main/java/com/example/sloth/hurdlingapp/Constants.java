@@ -39,4 +39,8 @@ public class Constants {
     //Regexes
     public final static String REGEX_COORDINATE_POINT_FORMAT = "\\d{1,4} \\d{1,4}";
 
+    //URL
+    //TODO add right ip.
+    public final static String URL_SERVER = "http://192.168.43.244:5000/";
+
 }
