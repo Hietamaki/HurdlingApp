@@ -176,8 +176,8 @@ public class RecordingSettingsActivity extends Activity implements View.OnClickL
             }
         });
 
-        fenceHeightInputLayout.getEditText().setText("84");
-        fenceSpacingInputLayout.getEditText().setText("830");
+        fenceHeightInputLayout.getEditText().setText(Integer.toString(Constants.FENCE_DEFAULT_HEIGHT));
+        fenceSpacingInputLayout.getEditText().setText(Integer.toString(Constants.FENCE_DEFAULT_SPACING));
     }
 
     @Override

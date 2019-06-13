@@ -35,6 +35,8 @@ public class Constants {
 
     //Lengths
     public final static int FENCE_MARKER_CENTER = 32;
+    public final static int FENCE_DEFAULT_HEIGHT = 84;
+    public final static int FENCE_DEFAULT_SPACING = 830;
 
     //Regexes
     public final static String REGEX_COORDINATE_POINT_FORMAT = "\\d{1,4} \\d{1,4}";
