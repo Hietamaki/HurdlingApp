@@ -56,6 +56,9 @@ public class FileSelectActivity extends Activity {
         // Get the files/$fileSelectType subdirectory;
         mVideosDir = new File(mPrivateRootDir, fileSelectType);
 
+        if (!mVideosDir.exists())
+            mVideosDir.mkdir();
+
         // Get the files in the Videos subdirectory
 
         mVideoFiles = mVideosDir.listFiles();
