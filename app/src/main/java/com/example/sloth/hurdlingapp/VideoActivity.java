@@ -302,7 +302,7 @@ public class VideoActivity extends Activity implements View.OnClickListener {
          *@see positionTextView or
          *@see durationTextView or
          *@see textViewUpdateHandler or
-         *@see delay.
+         *@see delay
          */
         positionTextView = findViewById(R.id.exo_position_custom);
         durationTextView = findViewById(R.id.exo_duration_custom);
