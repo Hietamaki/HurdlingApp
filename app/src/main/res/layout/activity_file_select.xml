@@ -17,7 +17,6 @@
         android:cacheColorHint="@android:color/holo_blue_dark"
         android:clickable="false"
         android:divider="@android:drawable/divider_horizontal_textfield"
-        android:entries="@android:drawable/alert_dark_frame"
         android:focusable="false"
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"
