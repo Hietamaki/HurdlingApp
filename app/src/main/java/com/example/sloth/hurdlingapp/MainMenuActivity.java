@@ -75,9 +75,8 @@ public class MainMenuActivity extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.button3:
-                //Pressing watchMenuButton starts file select for analysis activity.
-                intent = new Intent(MainMenuActivity.this, FileSelectActivity.class);
-                intent.putExtra(Constants.FILE_SELECT_TYPE_I, Constants.ANALYSIS_FOLDER_NAME_F);
+                //Pressing watchMenuButton starts ResultsActivity
+                intent = new Intent(MainMenuActivity.this, ResultsActivity.class);
                 startActivity(intent);
 
                 break;
