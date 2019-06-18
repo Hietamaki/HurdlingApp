@@ -17,10 +17,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class VideoSender {
+public class RemoteServer {
 
-    public static final VideoSender Instance = new VideoSender();
-    private Uri fileUri;
+    private static Uri fileUri;
 
     /**
      * Uploads a chosen video file to server with data about the video
@@ -29,7 +28,7 @@ public class VideoSender {
      * @param requestFile Is the file that is wanted to be upload to server and for analysis.
      * @param newFileName Is the name for the file in server-side.
      */
-    public void fileUpload(Activity activity, final File requestFile, final String newFileName,
+    public static void fileUpload(Activity activity, final File requestFile, final String newFileName,
                            final String json) {
         /*
          * Most file-related method calls need to be in
@@ -98,12 +97,19 @@ public class VideoSender {
     }
 
     /**
+     * Get list of recordings from server
+     */
+    public static String[] getRecordings() {
+        return new String[]{"dummy", "test", "data"};
+    }
+
+    /**
      * Gets the Mime type. Should be "video/mp4".
      *
      * @param path video's path
      * @return The Mime type
      */
-    private String getMimeType(String path) {
+    private static String getMimeType(String path) {
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
     }

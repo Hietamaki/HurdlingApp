@@ -34,7 +34,6 @@ import com.google.android.exoplayer2.util.Util;
 import com.google.gson.Gson;
 
 import java.io.File;
-import java.util.jar.Attributes;
 
 public class VideoActivity extends Activity implements View.OnClickListener {
 
@@ -432,7 +431,7 @@ public class VideoActivity extends Activity implements View.OnClickListener {
      * Notice that local ip is hard coded.
      */
     public void uploadFile() {
-        VideoSender.Instance.fileUpload(this, new File(destination),
+        RemoteServer.fileUpload(this, new File(destination),
                 NameParser.createServerSideName(this), createJSON());
     }
 
